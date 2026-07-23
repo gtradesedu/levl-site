@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>Legal — Levl</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F2F3F1">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="legal.css">
+<style>
+  .legal-list{display:flex;flex-direction:column;gap:0;margin-top:6px}
+  .legal-item{display:flex;justify-content:space-between;align-items:center;gap:20px;
+    padding:22px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;transition:padding .15s}
+  .legal-item:hover{padding-left:12px;text-decoration:none}
+  .legal-item:first-child{border-top:1px solid var(--line)}
+  .legal-item .li-text h2{border:0;padding:0;margin:0 0 3px;font-size:19px}
+  .legal-item .li-text p{margin:0;font-size:13.5px;color:var(--muted)}
+  .legal-item .li-arrow{font-family:var(--mono);color:var(--sig);font-size:18px;flex:none}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="index.html">levl<span class="cur"></span></a>
+  <a class="back" href="index.html">← Back to site</a>
+</div></nav>
+<header class="pg"><div class="wrap">
+  <div class="kicker">Legal</div>
+  <h1>Legal &amp; Policies</h1>
+  <div class="upd">Everything in one place.</div>
+</div></header>
+<main><div class="wrap">
+  <div class="legal-list">
+    <a class="legal-item" href="privacy.html">
+      <span class="li-text"><h2>Privacy Policy</h2><p>What data this site touches. Short version: nothing.</p></span>
+      <span class="li-arrow">→</span>
+    </a>
+    <a class="legal-item" href="terms.html">
+      <span class="li-text"><h2>Terms of Use</h2><p>Licence, subscriptions and how the tools may be used.</p></span>
+      <span class="li-arrow">→</span>
+    </a>
+    <a class="legal-item" href="disclaimer.html">
+      <span class="li-text"><h2>Risk &amp; Disclosure</h2><p>Trading risk, no financial advice, partner disclosure.</p></span>
+      <span class="li-arrow">→</span>
+    </a>
+    <a class="legal-item" href="imprint.html">
+      <span class="li-text"><h2>Imprint</h2><p>Legal notice and operator details.</p></span>
+      <span class="li-arrow">→</span>
+    </a>
+  </div>
+</div></main>
+<footer><div class="wrap">
+  <span>© <span id="yr">2026</span> Levl</span>
+  <a href="legal.html">Legal</a>
+  <span style="margin-left:auto">levlhq.com</span>
+</div></footer>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
