@@ -1,0 +1,351 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Levl Up — User Guide</title>
+<style>
+  :root{
+    --ink:#0E1116;
+    --paper:#F1F3F4;
+    --white:#FBFBFC;
+    --signal:#2E6BF0;
+    --signal-soft:#EAF1FE;
+    --graphite:#6B7480;
+    --line:#DDE1E6;
+    --line-soft:#E7EAEE;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --maxw:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  a{color:var(--signal);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ---------- HERO ---------- */
+  .hero{background:var(--ink);color:var(--paper);padding:64px 32px 56px}
+  .hero .in{max-width:var(--maxw);margin:0 auto}
+  .brandmark{display:inline-flex;align-items:flex-end;font-family:var(--mono);font-weight:600;
+    font-size:34px;letter-spacing:-0.02em;line-height:1;color:var(--paper)}
+  .brandmark .p{width:.17em;height:.17em;border-radius:50%;background:var(--signal);margin-left:.06em;margin-bottom:.05em;
+    box-shadow:0 0 .5em rgba(46,107,240,.55)}
+  .hero h1{font-family:var(--mono);font-weight:600;letter-spacing:-0.03em;
+    font-size:clamp(40px,7vw,72px);line-height:.98;margin:26px 0 6px;text-wrap:balance}
+  .hero .ey{font-family:var(--mono);text-transform:uppercase;letter-spacing:.32em;
+    font-size:12px;color:var(--graphite);margin-top:22px}
+  .hero .lead{font-size:clamp(17px,2.2vw,20px);color:#C7CCD3;max-width:60ch;margin-top:18px;line-height:1.55}
+  .hero .meta{font-family:var(--mono);font-size:12px;color:var(--graphite);margin-top:26px;letter-spacing:.02em}
+
+  /* ---------- LAYOUT ---------- */
+  .shell{max-width:var(--maxw);margin:0 auto;padding:0 32px;
+    display:grid;grid-template-columns:232px 1fr;gap:56px;align-items:start}
+  nav.toc{position:sticky;top:24px;padding:40px 0;align-self:start}
+  nav.toc .t{font-family:var(--mono);text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--graphite);margin-bottom:14px}
+  nav.toc ol{list-style:none;counter-reset:s}
+  nav.toc li{counter-increment:s;margin:2px 0}
+  nav.toc a{display:flex;gap:10px;padding:6px 10px;border-radius:7px;color:var(--ink);font-size:14px;line-height:1.35}
+  nav.toc a::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:11px;color:var(--graphite);padding-top:2px}
+  nav.toc a:hover{background:var(--white);text-decoration:none}
+
+  main{padding:40px 0 20px;min-width:0}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:38px 0;border-top:1px solid var(--line)}
+  section:first-child{border-top:0}
+  .sn{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--signal);display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .sn .num{font-weight:600}
+  .sn .bar{height:1px;flex:1;background:var(--line-soft)}
+  h2{font-family:var(--sans);font-weight:700;font-size:clamp(24px,3.4vw,32px);letter-spacing:-0.02em;line-height:1.1;text-wrap:balance}
+  h2 .accent{color:var(--graphite);font-weight:600;font-size:.62em;letter-spacing:0;display:block;margin-top:6px;font-family:var(--mono);text-transform:none}
+  .intro{color:var(--ink);font-size:17px;margin:14px 0 22px;max-width:64ch}
+
+  h3{font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:-0.01em;margin:26px 0 10px}
+
+  /* setting list */
+  dl.set{display:grid;grid-template-columns:1fr;gap:0;margin:6px 0}
+  dl.set > div{display:grid;grid-template-columns:200px 1fr;gap:20px;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+  dl.set > div:last-child{border-bottom:0}
+  dt{font-family:var(--mono);font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.5;letter-spacing:-0.01em}
+  dd{color:#33383F;font-size:15.5px;line-height:1.62}
+  dd b{color:var(--ink);font-weight:600}
+  dd .opt{font-family:var(--mono);font-size:12.5px;background:var(--white);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--graphite);white-space:nowrap}
+
+  /* callouts */
+  .note{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--signal);
+    border-radius:8px;padding:14px 18px;margin:18px 0;font-size:15px;color:#33383F}
+  .note .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--signal);display:block;margin-bottom:5px}
+  .note b{color:var(--ink)}
+
+  ul.plain{list-style:none;margin:10px 0}
+  ul.plain li{position:relative;padding-left:20px;margin:7px 0;color:#33383F;font-size:15.5px;line-height:1.6}
+  ul.plain li::before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--signal)}
+  ul.plain li b{color:var(--ink);font-weight:600}
+  ul.plain.dash li::before{border-radius:1px;width:8px;height:2px;top:13px;background:var(--graphite)}
+
+  p.para{color:#33383F;font-size:15.5px;margin:12px 0;max-width:66ch}
+  p.para b{color:var(--ink)}
+  .mono{font-family:var(--mono);font-size:.92em;background:var(--white);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+
+  /* worked example */
+  .example{background:var(--ink);color:#D7DBE1;border-radius:14px;padding:30px 32px;margin:26px 0}
+  .example .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.22em;color:var(--signal);margin-bottom:6px}
+  .example h3{color:var(--paper);margin:0 0 8px;font-size:22px}
+  .example p{font-size:15px;line-height:1.6;margin:10px 0;color:#B9BFC7}
+  .example b{color:var(--paper)}
+  .example ol{counter-reset:step;list-style:none;margin:16px 0}
+  .example ol li{counter-increment:step;position:relative;padding-left:38px;margin:12px 0;font-size:15px;line-height:1.6;color:#C7CCD3}
+  .example ol li::before{content:counter(step);position:absolute;left:0;top:-1px;width:24px;height:24px;border-radius:50%;
+    background:rgba(46,107,240,.16);color:#7AA5FF;font-family:var(--mono);font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center}
+  .example .result{border-top:1px solid rgba(255,255,255,.12);margin-top:18px;padding-top:16px;color:var(--paper)}
+  .example .mono{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);color:#D7DBE1}
+
+  /* footer */
+  footer{background:var(--ink);color:var(--graphite);padding:44px 32px;margin-top:20px}
+  footer .in{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px}
+  footer .bm{font-family:var(--mono);font-weight:600;font-size:20px;color:var(--paper);display:inline-flex;align-items:flex-end}
+  footer .bm .p{width:.17em;height:.17em;border-radius:50%;background:var(--signal);margin-left:.06em;margin-bottom:.05em}
+  footer a{color:#9AA1AA}
+
+  @media (max-width:820px){
+    .shell{grid-template-columns:1fr;gap:0;padding:0 22px}
+    nav.toc{position:static;padding:26px 0 0;border-bottom:1px solid var(--line)}
+    nav.toc ol{columns:2;column-gap:16px}
+    .hero{padding:48px 22px 40px}
+    dl.set > div{grid-template-columns:1fr;gap:4px}
+    dt{font-size:14px}
+  }
+
+  @media print{
+    body{background:#fff;font-size:11pt}
+    .hero,footer{background:#fff;color:#000;padding:0 0 12pt}
+    .hero .lead,.hero .meta,.hero .ey{color:#444}
+    .hero .brandmark,.hero h1{color:#000}
+    nav.toc{display:none}
+    .shell{display:block;max-width:100%;padding:0}
+    .example{background:#fff;color:#000;border:1px solid #999}
+    .example h3,.example b,.example .result{color:#000}
+    .example p,.example ol li{color:#222}
+    section{break-inside:avoid-page}
+    a{color:#000}
+  }
+</style>
+
+<div class="hero">
+  <div class="in">
+    <span class="brandmark">levl<span class="p"></span></span>
+    <div class="ey">TradingView Indicator &middot; User Guide</div>
+    <h1>Levl&nbsp;Up</h1>
+    <p class="lead">Everything you look at on a chart, in one tool. Sweeps, closures, CISD, SMT, FVG, key levels. This guide walks every setting in panel order, so you can build the chart that fits how you trade.</p>
+    <p class="meta">Start on the defaults. Turn features on one at a time as you get comfortable.</p>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="toc">
+    <div class="t">Contents</div>
+    <ol>
+      <li><a href="#general">General</a></li>
+      <li><a href="#closure">Closure Formation</a></li>
+      <li><a href="#additional">Additional levels</a></li>
+      <li><a href="#fvg">FVG</a></li>
+      <li><a href="#keylevel">Key Level Filter</a></li>
+      <li><a href="#smt">SMT &amp; PSP</a></li>
+      <li><a href="#htfcandles">HTF Candles</a></li>
+      <li><a href="#alarm">Alarm Filter</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 1 -->
+    <section id="general">
+      <div class="sn"><span class="num">01</span><span class="bar"></span></div>
+      <h2>General<span class="accent">Global display settings for the whole indicator.</span></h2>
+      <dl class="set">
+        <div><dt>Label Size</dt><dd>Size of every text label. <span class="opt">Tiny</span> <span class="opt">Small</span> <span class="opt">Normal</span> <span class="opt">Large</span>. Keep it small on busy charts.</dd></div>
+        <div><dt>Timezone</dt><dd>The display timezone for the candle time labels and the alert session windows (Asia / London / NY). Range UTC-12 to UTC+14. The core day/week logic and the fixed session lines (9:30, 18:00) are always anchored to New York and do not move with this setting. Set it to match how you read the chart, so labels and alert windows line up.</dd></div>
+        <div><dt>Bias</dt><dd>The master directional filter. Controls which formations show. <b>Neutral</b> both directions, <b>Bullish</b> only bull, <b>Bearish</b> only bear, <b>Auto</b> the indicator sets bias from daily structure and updates live when price breaks a key level or closes through equilibrium. Learn on Neutral, cut noise with a direction or Auto.</dd></div>
+        <div><dt>Show Bias Display</dt><dd>On-chart readout of the current bias. Most useful in Auto.</dd></div>
+        <div><dt>ADR</dt><dd>Average Daily Range over 20 days, plus how much price has used today. Controls: position, show, color. Context for whether a move is already extended.</dd></div>
+      </dl>
+      <div class="note"><span class="k">Good to know</span>The Bias readout and the ADR readout share one display block, so they use the same position and text color.</div>
+    </section>
+
+    <!-- 2 -->
+    <section id="closure">
+      <div class="sn"><span class="num">02</span><span class="bar"></span></div>
+      <h2>Closure Formation<span class="accent">The heart of the indicator. Controls the formations and how they align across timeframes.</span></h2>
+      <dl class="set">
+        <div><dt>History</dt><dd>How many past formations to keep per type. Low for live trading, high to study history.</dd></div>
+        <div><dt>Backtest</dt><dd>On keeps invalidated formations on the chart so you can study how they played out. Off for live.</dd></div>
+        <div><dt>TF Alignment</dt><dd>How the higher timeframe is chosen. There are always two timeframes: your chart and its HTF. <b>Auto</b> uses standard Fractal-Model alignment. <b>Custom</b> lets you set it yourself (field 1 = the chart TF the mapping applies to, field 2 = the HTF to use).</dd></div>
+        <div><dt>Closure Formation</dt><dd>The main break line at the closure level. Color, on/off, style, width. <b>This one toggle controls the whole standard formation</b> — break line, CISD, continuation and projection all hide together, because they are a single object.</dd></div>
+        <div><dt>CISD</dt><dd>Change in State of Delivery line. The confirmation trigger that makes a formation valid.</dd></div>
+        <div><dt>Pending CISD</dt><dd>The next potential CISD level, and where it would form.</dd></div>
+        <div><dt>Continuation CISD</dt><dd>After a valid closure, price should continue and form a continuation CISD. That is an entry opportunity.</dd></div>
+        <div><dt>SMT CISD</dt><dd>A CISD that confirms an SMT divergence. Combines the trigger with divergence for a higher-confluence entry.</dd></div>
+        <div><dt>CTF Closure Formation</dt><dd>Candle closure on the chart timeframe itself, for trading directly on a higher TF. Own color and toggle. Only on 15m charts and above.</dd></div>
+        <div><dt>Draw only at Key Levels</dt><dd>Show a closure formation only when it forms at a key level. Everything else stays hidden. The whole formation hides as one unit. Hidden formations are not deleted, turn the toggle off and they return. SMT formations always show. Full logic in section 5.</dd></div>
+      </dl>
+    </section>
+
+    <!-- 3 -->
+    <section id="additional">
+      <div class="sn"><span class="num">03</span><span class="bar"></span></div>
+      <h2>Additional<span class="accent">Supporting levels.</span></h2>
+      <dl class="set">
+        <div><dt>PDH / PDL</dt><dd>Previous Day High and Low lines.</dd></div>
+        <div><dt>PWH / PWL</dt><dd>Previous Week High and Low.</dd></div>
+        <div><dt>EQ (Equilibrium)</dt><dd>The 50% midpoint of the relevant range. <span class="opt">Both</span> <span class="opt">HTF Only</span> <span class="opt">Chart Only</span> <span class="opt">Latest only</span>.</dd></div>
+        <div><dt>HTF Swings</dt><dd>Significant swing highs and lows on the HTF, with a Max count.</dd></div>
+        <div><dt>HTF&sup2; Swings</dt><dd>Swing highs and lows one level higher: the HTF of your HTF. On a 5m chart your HTF is 1H, so HTF&sup2; is Daily. On a 1H chart HTF is Daily, so HTF&sup2; is Monthly. These are the levels the big moves react to, now visible without leaving your chart. Color, style, Max. Default off. With TF Alignment on Custom, HTF&sup2; follows your custom mapping.</dd></div>
+        <div><dt>CTF Swings</dt><dd>The same, on your chart timeframe. All swing types show one bull and one bear line even at Max = 1.</dd></div>
+        <div><dt>Separator</dt><dd>Vertical lines where each HTF period begins. Has a Count.</dd></div>
+        <div><dt>Session Lines &middot; 09:30 / 18:00</dt><dd>Opening price at two fixed New York times: 9:30 (NY stock open) and 18:00 (the day's open; forex charts use 17:00). Own color, style and toggle each. Intraday only.</dd></div>
+        <div><dt>Custom Session Line</dt><dd>Same mechanic, your chosen time. Enter any time as <span class="mono">HH:MM</span> in New York time and the indicator marks the opening price of that minute every day. Invalid input falls back to 10:30. Intraday only, on higher timeframes where no candle starts at that exact minute no line appears.</dd></div>
+        <div><dt>Fib Projection</dt><dd>Fibonacci target levels projected ahead from a valid formation's CISD range, giving objective take-profit zones. Separate Label checkbox.</dd></div>
+        <div><dt>T-Spot / EQ Fill</dt><dd>Highlights a reaction zone inside the formation. Bull and bear color, on/off. Only after a valid C2 closure (in C3 and C4) or a valid C3 closure (in C4).</dd></div>
+      </dl>
+    </section>
+
+    <!-- 4 -->
+    <section id="fvg">
+      <div class="sn"><span class="num">04</span><span class="bar"></span></div>
+      <h2>FVG<span class="accent">Fair value gaps, across three timeframe levels.</span></h2>
+      <dl class="set">
+        <div><dt>CTF FVG</dt><dd>Fair value gaps on the chart timeframe. Bull and bear color, toggle, Max count, invalidation mode.</dd></div>
+        <div><dt>HTF FVG</dt><dd>The same, on the HTF.</dd></div>
+        <div><dt>HTF&sup2; FVG</dt><dd>Gaps two levels up (the HTF of your HTF, see HTF&sup2; Swings). A Daily gap on your 5m chart is a bigger magnet than a 1H one, and this draws it right on your chart. Same controls as HTF FVG: colors, toggle, Max, invalidation mode <span class="opt">Close Through</span> <span class="opt">50% Close</span>. Default off.</dd></div>
+        <div><dt>iFVG (Inverse FVG)</dt><dd>When a regular FVG is fully traded through it can invert (support and resistance flip). A Max TF dropdown limits where it appears.</dd></div>
+        <div><dt>Bias Filter</dt><dd>Hides FVGs pointing against the current bias. Shows one bull and one bear even at Max = 1, but with the filter on you only see the one matching your direction.</dd></div>
+      </dl>
+      <div class="note"><span class="k">Good to know</span><b>Max controls what is drawn, not what is remembered.</b> Internally the indicator keeps up to 3&times; your Max per direction, and the Key Level Filter checks against that full memory. See section 5.</div>
+    </section>
+
+    <!-- 5 -->
+    <section id="keylevel">
+      <div class="sn"><span class="num">05</span><span class="bar"></span></div>
+      <h2>Key Level Filter<span class="accent">The full logic. This is the one worth reading twice.</span></h2>
+      <p class="intro">Not every closure formation is worth your attention. The ones that form at a key level are. The filter marks every formation that forms at one, and lets you hide or mute the rest. Two independent toggles use that mark:</p>
+      <ul class="plain">
+        <li><b>Draw only at Key Levels</b> (Closure Formation group) — only key-level formations get drawn.</li>
+        <li><b>Key Level Filter</b> (Alarm Filter group) — only key-level formations fire alerts.</li>
+      </ul>
+      <p class="para">They do not affect each other. You can filter alerts while still drawing everything, clean the chart while keeping all alerts, or both.</p>
+
+      <h3>What counts as a key level</h3>
+      <ul class="plain">
+        <li>HTF swing highs and lows, and HTF&sup2; swing highs and lows</li>
+        <li>PDH / PDL and PWH / PWL</li>
+        <li>HTF FVGs and HTF&sup2; FVGs</li>
+      </ul>
+      <p class="para"><b>What deliberately does not count:</b> CTF swings, CTF FVGs, iFVGs, EQ, session lines. Chart-timeframe levels sit too close to price. If they counted, almost every formation would qualify and the filter would filter nothing.</p>
+
+      <h3>How a formation earns the mark</h3>
+      <p class="intro">When price breaks or trades into a key level, a <b>3-HTF-candle window</b> opens. A formation only counts as at a key level if it confirms <b>inside</b> that window. Outside it, it does not.</p>
+      <p class="para">This works the same for every key-level type &mdash; swings, PD/PW levels, and HTF or HTF&sup2; FVGs. The window is always counted in <b>HTF candles</b>, even for an HTF&sup2; level: the HTF candle is the unit.</p>
+      <ul class="plain dash">
+        <li>Direction matters. A high-side break (swing high, PDH, PWH) or a bearish gap opens the window for <b>bearish</b> formations; a low-side break or a bullish gap opens it for <b>bullish</b> ones. Sweep into the level, reverse away from it.</li>
+        <li>Each level triggers once. A level that has already been swept or broken is spent &mdash; it does not open a window again.</li>
+      </ul>
+      <p class="para">Once a formation has earned the mark it keeps it for life &mdash; a C3 formation inherits it from its C2 phase, and a formation already alive when the contact happens picks it up too.</p>
+
+      <div class="note"><span class="k">The part most people miss</span>The filter only sees what you show it. It only counts a level type whose display toggle is <b>on</b>. Turn a toggle off and that level type drops out of the filter entirely, it stops marking formations. If HTF&sup2; FVG is off, no formation ever qualifies through an HTF&sup2; gap. Same for HTF FVG, HTF Swings, HTF&sup2; Swings, PDH/PDL and PWH/PWL, no exceptions. This is your main lever: switch off the levels you do not care about, leave on the ones you do.</div>
+
+      <h3>Max vs. memory</h3>
+      <p class="para">Max limits <b>drawing</b>, not <b>tracking</b>. FVGs: the indicator remembers up to 3&times; your Max per direction, and the filter checks all of them. Swings: it keeps up to 30 open swings per side, every untouched one counts. So with FVG Max = 1 you can get a key-level formation from a gap that is not drawn anymore. The formation is real, you just cannot see its gap. Raise Max to see what triggered the mark.</p>
+
+      <div class="note"><span class="k">Exception</span>SMT formations always pass both filters. The divergence is their own confluence, they do not need a level.</div>
+    </section>
+
+    <!-- 6 -->
+    <section id="smt">
+      <div class="sn"><span class="num">06</span><span class="bar"></span></div>
+      <h2>SMT &amp; PSP<span class="accent">Divergence between correlated instruments.</span></h2>
+      <dl class="set">
+        <div><dt>Show SMT</dt><dd>Master switch for all SMT features (color, toggle, width). Off means all SMT off.</dd></div>
+        <div><dt>HTF SMT</dt><dd>Divergence at HTF swing points.</dd></div>
+        <div><dt>CTF SMT</dt><dd>Divergence at chart-timeframe swing points.</dd></div>
+        <div><dt>PDH/PDL SMT</dt><dd>Divergence at the previous day high and low.</dd></div>
+        <div><dt>PWH/PWL SMT</dt><dd>Divergence at the previous week high and low.</dd></div>
+        <div><dt>SMT on HTF Candle</dt><dd>Draws divergence on the HTF candle boxes.</dd></div>
+        <div><dt>Peers</dt><dd>The instruments you are compared against. <b>Auto</b> recognizes your instrument and picks peers (e.g. NQ &rarr; ES + YM). <b>Custom</b> lets you type two peer symbols. To compare against a single peer, use Custom with only that one pair.</dd></div>
+        <div><dt>PSP (Precision Swing Point)</dt><dd>Compares closing direction candle by candle. You close up, a peer closes down, that is a PSP. Color, toggle, style (<span class="opt">Color</span> or <span class="opt">Dot</span>), Max count. <b>Require C2</b> only shows a PSP where there is also a C2 closure. <b>Require SMT</b> only where SMT divergence is present too. <b>PSP on HTF Candle</b> draws PSP markers on the HTF boxes.</dd></div>
+      </dl>
+
+      <div class="note"><span class="k">Advanced &middot; comparing four assets</span>
+        Custom compares you against two peers, so you plus two peers is three assets at once. To watch a fourth (say Gold, Silver, XAUEUR and XAUGBP together), add the indicator to the chart a <b>second time</b>:
+        <ul class="plain" style="margin-top:10px;margin-bottom:6px">
+          <li><b>First copy</b> &mdash; SMT on <b>Custom</b>: Peer 1 <span class="mono">SI1!</span>, Peer 2 <span class="mono">FOREXCOM:XAUEUR</span></li>
+          <li><b>Second copy</b> &mdash; turn everything off except SMT, set <b>Asset Label off</b>, also <b>Custom</b>: Peer 1 <span class="mono">FOREXCOM:XAUGBP</span>, Peer 2 <span class="mono">GC1!</span></li>
+        </ul>
+        Now you see SMTs across all four. The one trade-off: on the Silver chart, an SMT between Silver and Gold carries no asset label (same for the XAUGBP ones).
+        <p class="para" style="margin:10px 0 0">Then save it as an <b>Indicator Template</b>. On any Gold or Silver chart, load the template and every setting applies automatically. Keep a second template for standard use (SMT = Auto) so you can switch back in one click.</p>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section id="htfcandles">
+      <div class="sn"><span class="num">07</span><span class="bar"></span></div>
+      <h2>HTF Candles<span class="accent">Higher-timeframe structure, drawn beside your chart.</span></h2>
+      <p class="intro">Draws HTF candles as boxes next to the chart, so you see HTF structure without leaving your chart timeframe.</p>
+      <dl class="set">
+        <div><dt>Show HTF Candles</dt><dd>Master on/off.</dd></div>
+        <div><dt>Count / Offset</dt><dd>How many candles, and how far to the right they sit.</dd></div>
+        <div><dt>Bull / Bear Body</dt><dd>Body colors.</dd></div>
+        <div><dt>Outline</dt><dd>Border and wick color.</dd></div>
+        <div><dt>Time labels</dt><dd>Checkbox, size, color. Adapts to the TF (HH:mm intraday, day name daily, month monthly).</dd></div>
+        <div><dt>Second HTF Box</dt><dd>A second, higher-TF set alongside the first (e.g. 1h and 4h boxes together). Own toggle and TF field. Auto-orders low to high, swapping if the second TF is lower.</dd></div>
+        <div><dt>Count / Gap</dt><dd>For the second box: how many candles, and spacing from the first set.</dd></div>
+        <div><dt>HTF Info Label</dt><dd>Timeframe plus a live countdown to candle close on the live box. Position (Above/Below) and size.</dd></div>
+      </dl>
+    </section>
+
+    <!-- 8 -->
+    <section id="alarm">
+      <div class="sn"><span class="num">08</span><span class="bar"></span></div>
+      <h2>Alarm Filter<span class="accent">Fires a TradingView alert when a chosen event happens.</span></h2>
+      <p class="intro">Pick your events with the checkboxes, then create one alert in TradingView using <b>"Any alert() function call."</b></p>
+      <dl class="set">
+        <div><dt>Key Level Filter</dt><dd>The alert side of section 5. On means the formation alerts (HTF Sweep, C2 Closure, C3 Closure, CISD, CISD Touch, Continuation CISD) only fire when the formation is at a key level. A sweep alert only fires if the sweep itself hits one. Level alerts (FVG Touch, Swing Breach, PDH/PDL, PWH/PWL) are untouched by this filter. Independent of "Draw only at Key Levels", so your chart can show everything while your phone only pings on the ones that matter.</dd></div>
+        <div><dt>Session Filter</dt><dd>Master toggle. Alerts only fire during enabled sessions.</dd></div>
+        <div><dt>Asia / London / NY AM / NY PM</dt><dd>Four sessions, each with a toggle and a time window. Times use the General-group timezone.</dd></div>
+        <div><dt>Event checkboxes</dt><dd>HTF Sweep &middot; HTF C2 Closure &middot; HTF C3 Closure &middot; CISD &middot; CISD Touch (price touches a pending CISD, get ready before confirmation) &middot; Continuation CISD &middot; PDH/PDL Break &middot; PWH/PWL Break &middot; HTF FVG Touch &middot; CTF FVG Touch &middot; HTF&sup2; FVG Touch &middot; HTF Swing Breach &middot; CTF Swing Breach &middot; HTF&sup2; Swing Breach.</dd></div>
+      </dl>
+      <p class="para"><b>Setup:</b> right-click the chart &rarr; Add Alert &rarr; condition = <span class="mono">Levl Up</span> &rarr; "Any alert() function call."</p>
+
+      <div class="note"><span class="k">Good to know</span>To alert on a candle <b>closure</b>, create the alert from a <b>lower</b> timeframe. For a 4h closure use 15m/30m, for a 30m closure use 3m. The HTF&sup2; alerts (FVG Touch, Swing Breach) only work while the matching HTF&sup2; display toggle is on, the indicator only tracks what it shows.</div>
+
+      <div class="note"><span class="k">Set up first, create the alert last</span>TradingView freezes your indicator settings the moment you create an alert. If HTF&sup2; FVG was off when you created it, that alert will never track HTF&sup2; gaps, even if you turn the toggle on afterwards. Get every setting right, then create the alert. Changed something later? Delete the alert and make a new one.</div>
+
+      <div class="example">
+        <div class="k">Worked example</div>
+        <h3>1H C2 closure, but only at a 4H key level</h3>
+        <p>This ties together custom alignment (section 2), HTF&sup2; (sections 3 and 4) and the Key Level Filter (section 5). Alerting on a 1H closure means running the alert from a lower TF, so you build this on the <b>5m chart</b>.</p>
+        <ol>
+          <li><b>TF Alignment &rarr; Custom &rarr; 1h / 4h.</b> On the 5m chart your HTF is already 1H. This mapping makes HTF&sup2; resolve to 4H instead of the automatic Daily, so "one level above your HTF" is now the 4H.</li>
+          <li>On the 5m chart, turn <b>on HTF&sup2; Swings and HTF&sup2; FVG.</b> You now see the 4H swing highs and lows and 4H gaps drawn on your 5m chart.</li>
+          <li>To count <b>only</b> 4H levels, turn <b>off everything else that feeds the filter:</b> HTF FVG, HTF Swings, and PDH/PDL + PWH/PWL (those last two are on by default).</li>
+          <li>In the Alarm Filter group, turn <b>on Key Level Filter</b> and check <b>HTF C2 Closure.</b></li>
+          <li>Create the alert on the 5m chart ("Any alert() function call").</li>
+        </ol>
+        <p class="result"><b>Result:</b> you get pinged on every 1H C2 closure that forms at a 4H FVG or 4H swing high/low. Nothing else.</p>
+        <p>Why not via CTF closures: a CTF closure cannot confirm whether the lower timeframe formed a CISD. A 1H C2 closure needs a 5m CISD to validate, and a CTF closure drawn on the 1H chart has no reliable way to see that 5m CISD. The higher-TF closure path above is the correct way to build this.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="in">
+    <span class="bm">levl<span class="p"></span></span>
+    <span>Questions? <a href="mailto:help@levlhq.com">help@levlhq.com</a> &middot; <a href="https://levlhq.com">levlhq.com</a></span>
+  </div>
+</footer>
