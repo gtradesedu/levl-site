@@ -280,15 +280,18 @@
         <div><dt>Show SMT</dt><dd>Master switch for all SMT features (color, toggle, width). Off means all SMT off.</dd></div>
         <div><dt>HTF SMT</dt><dd>Divergence at HTF swing points.</dd></div>
         <div><dt>CTF SMT</dt><dd>Divergence at chart-timeframe swing points.</dd></div>
+        <div><dt>CTF SMT History</dt><dd>How many CTF divergences to keep on screen per side. <b>1</b> (default) shows only the latest, as before. Higher keeps older ones too &mdash; each stays until price takes its extreme, or it drops off past the limit.</dd></div>
         <div><dt>PDH/PDL SMT</dt><dd>Divergence at the previous day high and low.</dd></div>
         <div><dt>PWH/PWL SMT</dt><dd>Divergence at the previous week high and low.</dd></div>
         <div><dt>SMT on HTF Candle</dt><dd>Draws divergence on the HTF candle boxes.</dd></div>
-        <div><dt>Peers</dt><dd>The instruments you are compared against. <b>Auto</b> recognizes your instrument and picks peers (e.g. NQ &rarr; ES + YM). <b>Custom</b> lets you type two peer symbols. To compare against a single peer, use Custom with only that one pair.</dd></div>
+        <div><dt>SMT Mode</dt><dd>The instruments you are compared against. <b>Automatic</b> recognizes your instrument and uses two correlated peers from the list below (e.g. NQ &rarr; ES + YM) &mdash; always both. <b>Custom</b> lets you set the peers yourself.</dd></div>
+        <div><dt>Enable Second SMT?</dt><dd>Applies in <b>Custom</b> only. Off compares you against a single peer (Peer 1) &mdash; a touch lighter, since the second symbol is no longer fetched. <b>Automatic</b> always uses both list peers, so this has no effect there. On is the default.</dd></div>
+        <div><dt>Peer 1 &middot; Peer 2 &middot; Inverse?</dt><dd>In Custom, type your two peer symbols. Each has an <b>Inverse?</b> checkbox for instruments that move opposite to yours (e.g. DXY), so the divergence still reads correctly.</dd></div>
         <div><dt>PSP (Precision Swing Point)</dt><dd>Compares closing direction candle by candle. You close up, a peer closes down, that is a PSP. Color, toggle, style (<span class="opt">Color</span> or <span class="opt">Dot</span>), Max count. <b>Require C2</b> only shows a PSP where there is also a C2 closure. <b>Require SMT</b> only where SMT divergence is present too. <b>PSP on HTF Candle</b> draws PSP markers on the HTF boxes.</dd></div>
       </dl>
 
       <h3 style="font-size:15px;margin:26px 0 4px">Auto peer list</h3>
-      <p class="intro" style="margin:6px 0 0">Which peers <b>Auto</b> picks for each instrument. Matching is by name, so <span class="mono">NQ1!</span>, <span class="mono">MNQ</span> and <span class="mono">NQZ2025</span> all count as NQ. Anything not listed has no Auto peer &mdash; use <b>Custom</b>.</p>
+      <p class="intro" style="margin:6px 0 0">Which peers <b>Automatic</b> uses for each instrument &mdash; always both. Matching is by name, so <span class="mono">NQ1!</span>, <span class="mono">MNQ</span> and <span class="mono">NQZ2025</span> all count as NQ. Anything not listed has no automatic peer &mdash; use <b>Custom</b>.</p>
       <table class="ptbl">
         <thead><tr><th>Your instrument</th><th>Peer 1</th><th>Peer 2</th></tr></thead>
         <tbody>
@@ -297,8 +300,8 @@
           <tr><td>ES</td><td class="sym">NQ1!</td><td class="sym">YM1!</td></tr>
           <tr><td>YM</td><td class="sym">NQ1!</td><td class="sym">ES1!</td></tr>
           <tr class="grp"><td colspan="3">Forex</td></tr>
-          <tr><td>EURUSD</td><td class="sym">GBPUSD</td><td>&mdash;</td></tr>
-          <tr><td>GBPUSD</td><td class="sym">EURUSD</td><td>&mdash;</td></tr>
+          <tr><td>EURUSD</td><td class="sym">GBPUSD</td><td class="sym">TVC:DXY <span class="opt">inverted</span></td></tr>
+          <tr><td>GBPUSD</td><td class="sym">EURUSD</td><td class="sym">TVC:DXY <span class="opt">inverted</span></td></tr>
           <tr class="grp"><td colspan="3">Metals</td></tr>
           <tr><td>GC (Gold)</td><td class="sym">SI1!</td><td class="sym">FOREXCOM:XAUEUR</td></tr>
           <tr><td>SI (Silver)</td><td class="sym">GC1!</td><td class="sym">FOREXCOM:XAUEUR</td></tr>
@@ -312,7 +315,7 @@
           <tr><td>ETH</td><td class="sym">BTCUSD</td><td>&mdash;</td></tr>
         </tbody>
       </table>
-      <p class="intro" style="margin:10px 0 0;font-size:14px;color:var(--graphite)">A dash means Auto uses a single peer. Use <b>Custom</b> to add a second, or to compare instruments outside this list.</p>
+      <p class="intro" style="margin:10px 0 0;font-size:14px;color:var(--graphite)">A dash means Automatic uses a single peer. <b>Inverted</b> peers (like DXY, which moves opposite to EURUSD) are flipped automatically so the divergence reads correctly. In <b>Custom</b> you set your own peers &mdash; each has an <b>Inverse?</b> toggle for inverse instruments.</p>
 
       <div class="note"><span class="k">Advanced &middot; comparing four assets</span>
         Custom compares you against two peers, so you plus two peers is three assets at once. To watch a fourth (say Gold, Silver, XAUEUR and XAUGBP together), add the indicator to the chart a <b>second time</b>:
