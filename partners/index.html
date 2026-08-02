@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prop firms &amp; tools | Levl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Futures prop firms side by side: what you pay to start, what you keep, how far it scales. Only firms worth funding an account with.">
+<link rel="canonical" href="https://levlhq.com/partners/">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png?v=2">
+<meta name="theme-color" content="#F2F3F1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Levl">
+<meta property="og:title" content="Prop firms &amp; tools | Levl">
+<meta property="og:description" content="Futures prop firms side by side: what you pay to start, what you keep, how far it scales.">
+<meta property="og:url" content="https://levlhq.com/partners/">
+<meta property="og:image" content="https://levlhq.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Prop firms &amp; tools | Levl">
+<meta name="twitter:description" content="Futures prop firms side by side: what you pay to start, what you keep, how far it scales.">
+<meta name="twitter:image" content="https://levlhq.com/og.png">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/levl.css">
+<style>
+  .hero{padding:clamp(46px,6.5vw,80px) 0 clamp(20px,2.6vw,34px);position:relative;overflow:hidden}
+  .hero h1{font-weight:900;font-size:clamp(38px,5.6vw,74px);line-height:.98;letter-spacing:-.045em;color:var(--ink);max-width:15ch}
+  .hero h1 .sl{color:var(--sig)}
+  .hero .sub{font-size:clamp(16px,1.85vw,20px);color:var(--muted);max-width:62ch;margin-top:26px;font-weight:500}
+  .hero .sub b{color:var(--text);font-weight:700}
+  .hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .hstat{display:inline-flex;align-items:baseline;gap:8px;border:1px solid var(--line2);background:var(--paper2);
+      border-radius:100px;padding:9px 16px}
+  .hstat b{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--ink)}
+  .hstat span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+  /* ---------- featured ---------- */
+  .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,22px);align-items:center;
+      padding:clamp(10px,2vw,26px) 0}
+  @media(max-width:960px){.feat{grid-template-columns:1fr;max-width:430px;margin:0 auto;gap:18px}}
+  .fc{position:relative;border:1px solid var(--line2);border-radius:20px;background:var(--paper2);
+      overflow:hidden;transition:transform .3s cubic-bezier(.3,.7,.3,1),box-shadow .3s,border-color .3s;
+      box-shadow:0 22px 54px -46px rgba(14,17,22,.5)}
+  .fc:hover{transform:translateY(-5px);box-shadow:0 34px 74px -42px rgba(14,17,22,.55);border-color:var(--line)}
+  .fc.hero-card{border-color:var(--sig);background:#fff;transform:scale(1.055);z-index:2;
+      box-shadow:0 40px 80px -38px rgba(46,107,240,.5),0 0 0 4px var(--sig-soft)}
+  .fc.hero-card:hover{transform:scale(1.055) translateY(-5px)}
+  @media(max-width:960px){.fc.hero-card,.fc.hero-card:hover{transform:none}}
+  .fc-ribbon{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+      text-align:center;padding:9px 0;color:var(--faint);background:var(--paper);border-bottom:1px solid var(--line)}
+  .fc.hero-card .fc-ribbon{color:#fff;background:linear-gradient(100deg,var(--sig-deep),var(--sig));border-bottom-color:var(--sig)}
+  .fc-in{padding:clamp(20px,2.3vw,26px);position:relative}
+  .fc.hero-card .fc-in::before{content:'';position:absolute;inset:-70% -30% auto -30%;height:120%;pointer-events:none;
+      background:radial-gradient(50% 55% at 50% 0,var(--sig-soft),transparent 72%)}
+  .fc-head{display:flex;align-items:center;gap:13px;position:relative}
+  .fc-mark{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;
+      font-family:var(--mono);font-weight:800;font-size:14px;color:#fff;letter-spacing:-.03em;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 16px rgba(14,17,22,.18)}
+  /* a real logo carries its own shape, so it gets no tile, no border and no shadow.
+     Only the fallback initials keep the coloured square. */
+  .fc-mark.img{box-shadow:none;background:none!important;border-radius:0}
+  .fc-mark img{width:100%;height:100%;object-fit:contain;display:block}
+  .fc h3{font-weight:900;font-size:clamp(20px,2.2vw,24px);letter-spacing:-.035em;color:var(--ink);line-height:1.08}
+  .fc-sub{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-top:5px}
+  .fc.hero-card .fc-sub{color:var(--sig)}
+  .fc-rows{margin-top:20px;position:relative}
+  .fc-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+  .fc-row .k{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted);font-weight:500}
+  .fc-row .k svg{width:14px;height:14px;stroke:var(--faint);fill:none;stroke-width:2;flex:none}
+  .fc-row .v{font-family:var(--mono);font-weight:700;font-size:14.5px;color:var(--ink);white-space:nowrap}
+  .fc.hero-card .fc-row .v{color:var(--sig-deep)}
+  .fc-deal{margin-top:18px;border:1px dashed var(--line2);border-radius:12px;padding:11px 14px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--paper)}
+  .fc-deal.on{border-color:var(--sig);background:var(--sig-soft)}
+  .fcd-l{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);display:block}
+  .fcd-v{font-family:var(--mono);font-weight:700;font-size:16px;letter-spacing:.09em;color:var(--faint);display:block;margin-top:3px}
+  .fc-deal.on .fcd-v{color:var(--sig)}
+  .cb-c{font-family:var(--mono);font-size:11px;border:1px solid var(--line2);background:#fff;color:var(--text);
+      border-radius:8px;padding:6px 11px;cursor:pointer;transition:border-color .15s,color .15s}
+  .cb-c:hover{border-color:var(--sig);color:var(--sig)}
+  .fc-bonus{margin-top:10px;text-align:center;font-family:var(--mono);font-size:12px;font-weight:700;
+      color:var(--sig-deep);letter-spacing:.02em}
+  .fc-bonus::before{content:'★';margin-right:6px;color:var(--sig)}
+  .fc-bonus span{display:block;font-weight:400;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--faint);margin-top:4px}
+  .fc-cta{margin-top:14px}
+  .fc-cta .btn{width:100%;justify-content:center}
+  .feat-note{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:center;margin-top:8px}
+
+  /* ---------- the Levl Up month ---------- */
+  .perk{position:relative;overflow:hidden;border-radius:22px;background:var(--ink);
+      padding:clamp(28px,3.6vw,50px);display:grid;grid-template-columns:1.3fr .85fr;
+      gap:clamp(26px,3vw,50px);align-items:center;box-shadow:0 40px 90px -50px rgba(14,17,22,.8)}
+  .perk::before{content:'';position:absolute;inset:-40% -25% auto 45%;height:180%;pointer-events:none;
+      background:radial-gradient(48% 50% at 50% 50%,rgba(46,107,240,.42),transparent 70%)}
+  .perk::after{content:'';position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(transparent 0 1px,rgba(255,255,255,.028) 1px) 0 0/100% 34px}
+  @media(max-width:880px){.perk{grid-template-columns:1fr}}
+  .perk-l{position:relative}
+  .perk-tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sig);display:block}
+  .perk h2{font-weight:900;font-size:clamp(25px,3.1vw,40px);letter-spacing:-.042em;line-height:1.03;color:#fff;margin-top:15px}
+  .perk h2 .sl{color:var(--sig)}
+  .perk p{color:rgba(232,235,239,.7);font-size:15px;margin-top:17px;max-width:50ch;line-height:1.62}
+  .perk p a{color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.4)}
+  .perk-names{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+  .perk-names span{font-family:var(--mono);font-size:11.5px;color:#E8EBEF;border:1px solid rgba(255,255,255,.19);
+      background:rgba(255,255,255,.06);border-radius:100px;padding:7px 14px}
+  .perk-r{position:relative;display:flex;justify-content:center}
+  .perk-card{border:1px solid rgba(46,107,240,.5);background:rgba(46,107,240,.13);border-radius:20px;
+      padding:clamp(22px,2.6vw,30px) clamp(26px,3vw,38px);text-align:center;backdrop-filter:blur(2px)}
+  .perk-card .brand{font-size:19px;color:#fff}
+  .perk-card .up{color:var(--sig);font-weight:800;margin-left:.18em}
+  .perk-num{font-family:var(--display,inherit);font-weight:900;font-size:clamp(46px,6vw,74px);line-height:.9;
+      color:#fff;letter-spacing:-.05em;margin-top:14px}
+  .perk-num em{font-style:normal;font-size:.32em;color:var(--sig);display:block;letter-spacing:.2em;
+      text-transform:uppercase;font-family:var(--mono);font-weight:700;margin-top:10px}
+  .perk-strike{font-family:var(--mono);font-size:11.5px;color:rgba(232,235,239,.5);margin-top:14px}
+  .perk-strike s{opacity:.75}
+
+  /* ---------- tabs + toolbar ---------- */
+  .tabs{display:flex;justify-content:center;gap:4px;padding:5px;border:1px solid var(--line2);border-radius:100px;
+      background:var(--paper2);width:fit-content;margin:0 auto clamp(22px,3vw,32px)}
+  .tab{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;
+      border:none;background:none;color:var(--muted);padding:10px 20px;border-radius:100px;cursor:pointer;
+      transition:background .18s,color .18s;white-space:nowrap}
+  .tab:hover{color:var(--ink)}
+  .tab.on{background:var(--ink);color:var(--paper)}
+  .tab .ct{color:var(--faint);margin-left:6px;font-size:10.5px}
+  .tab.on .ct{color:rgba(255,255,255,.55)}
+
+  .tbar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .tbar h2{font-weight:900;font-size:clamp(22px,2.8vw,32px);letter-spacing:-.035em;color:var(--ink)}
+  .tbar p{color:var(--muted);font-size:14px;margin-top:7px;max-width:60ch}
+  .srch{position:relative}
+  .srch input{font-family:var(--mono);font-size:13px;color:var(--text);background:#fff;border:1px solid var(--line2);
+      border-radius:11px;padding:11px 15px 11px 36px;width:220px;max-width:100%;transition:border-color .15s,box-shadow .15s}
+  .srch input:focus{outline:none;border-color:var(--sig);box-shadow:0 0 0 3px var(--sig-soft)}
+  .srch svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:14px;height:14px;
+      stroke:var(--faint);fill:none;stroke-width:2.2;pointer-events:none}
+
+  /* ---------- table ---------- */
+  .tw{border:1px solid var(--line2);border-radius:18px;background:var(--paper2);overflow:hidden;
+      box-shadow:0 26px 60px -52px rgba(14,17,22,.45)}
+  .tscroll{overflow-x:auto}
+  table.cmp{width:100%;border-collapse:collapse;min-width:1000px}
+  table.cmp th{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);
+      font-weight:600;text-align:left;padding:14px 16px;background:var(--paper);border-bottom:1px solid var(--line2);white-space:nowrap}
+  table.cmp th.s{cursor:pointer;-webkit-user-select:none;user-select:none;transition:color .15s}
+  table.cmp th.s:hover{color:var(--text)}
+  table.cmp th .ar{opacity:.32;margin-left:5px}
+  table.cmp th.act .ar{opacity:1;color:var(--sig)}
+  table.cmp td{padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:14px;color:var(--text)}
+  table.cmp tr:last-child td{border-bottom:none}
+  table.cmp tbody tr{transition:background .15s,box-shadow .15s}
+  table.cmp tbody tr:hover{background:#fff}
+  table.cmp tr.mine td{background:var(--sig-soft)}
+  table.cmp tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--sig)}
+  .t-rank{font-family:var(--mono);font-size:11.5px;color:var(--faint);width:34px;text-align:center}
+  .t-firm{display:flex;align-items:center;gap:12px;min-width:210px}
+  .t-mark{width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+      font-family:var(--mono);font-weight:800;font-size:10.5px;color:#fff;letter-spacing:-.02em;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.26)}
+  .t-mark.img{box-shadow:none;background:none!important;border-radius:0}
+  .t-mark img{width:100%;height:100%;object-fit:contain;display:block}
+  .t-name{font-weight:700;color:var(--ink);letter-spacing:-.012em;line-height:1.2;display:block}
+  .t-meta{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--faint);margin-top:4px;display:block}
+  .badge{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;
+      padding:3px 7px;border-radius:5px;margin-top:5px;font-weight:700}
+  .badge.b1{background:rgba(31,169,106,.11);color:#137a4b}
+  .badge.b2{background:var(--sig-soft);color:var(--sig-deep)}
+  .badge.b3{background:rgba(14,17,22,.07);color:var(--text)}
+  .stars{position:relative;display:inline-block;font-size:13px;line-height:1;letter-spacing:2px;white-space:nowrap}
+  .stars .bg{color:var(--line2)}
+  .stars .fg{position:absolute;left:0;top:0;overflow:hidden;color:var(--sig);white-space:nowrap}
+  .t-rate{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:5px;display:block}
+  .t-mono{font-family:var(--mono);font-size:13.5px;color:var(--ink);white-space:nowrap;font-weight:600}
+  .t-mono i{font-style:normal;font-size:11px;color:var(--faint);font-weight:400}
+  .t-plat{display:flex;gap:5px;flex-wrap:wrap;max-width:170px}
+  .chip{font-family:var(--mono);font-size:10px;padding:4px 8px;border-radius:6px;background:#fff;
+      border:1px solid var(--line2);color:var(--muted);white-space:nowrap}
+  .chip.more{border-style:dashed;color:var(--faint)}
+  .t-deal{display:inline-flex;align-items:center;gap:7px;border:1px dashed var(--sig);background:#fff;
+      border-radius:9px;padding:7px 11px;font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--sig);white-space:nowrap}
+  .t-none{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+  .t-bonus{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+      font-weight:700;color:var(--ink);margin-top:7px}
+  .t-bonus::before{content:'★';color:var(--sig);margin-right:5px}
+  .t-act{text-align:right;white-space:nowrap}
+  .btn-xs{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;padding:8px 14px;border-radius:9px;
+      border:1px solid var(--line2);background:#fff;color:var(--text);text-decoration:none;display:inline-block;
+      transition:border-color .15s,color .15s,background .15s}
+  .btn-xs:hover{border-color:var(--ink);color:var(--ink)}
+  .btn-xs.on{background:var(--sig);border-color:var(--sig);color:#fff}
+  .btn-xs.on:hover{background:var(--sig-deep);border-color:var(--sig-deep);color:#fff}
+  .t-what{color:var(--muted);font-size:13.5px;max-width:40ch;line-height:1.5}
+  .empty{padding:46px 16px;text-align:center;color:var(--faint);font-family:var(--mono);font-size:13px}
+
+  .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px)}
+  @media(max-width:860px){.rules{grid-template-columns:1fr}}
+  @media(max-width:560px){.tbar{flex-direction:column;align-items:flex-start}.srch,.srch input{width:100%}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap wrap-wide">
+    <div class="nav-l">
+      <a class="brand" href="/">levl<span class="cur"></span></a>
+      <span class="brand-page">Partners</span>
+    </div>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-r">
+      <a class="lnk" href="/levl-up/">Levl Up</a>
+      <a class="lnk" href="/cockpit/">Cockpit</a>
+      <a class="lnk on" href="/partners/">Partners</a>
+      <a class="btn btn-sm btn-ink" href="https://whop.com/levl-hq/levl-up/">Get access</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div class="wrap wrap-wide">
+    <h1 class="rv in">The firms and tools<br>I <span class="sl">run on</span>.</h1>
+    <p class="sub rv in d1">Everything on this page is what I actually trade and work with, laid out with the numbers you decide on. Going through my link costs you the same or less, and <b>the commission is what keeps the Cockpit free and pays for the next tool I build.</b> That is all this page is.</p>
+    <div class="hero-stats rv in d2" id="hstats"></div>
+  </div>
+</header>
+
+<div class="lvl wrap-wide" id="deals"><span class="tag">01 &middot; Featured</span><span class="ln"></span><span class="nd"></span></div>
+<section style="padding-top:clamp(20px,3vw,34px)">
+  <div class="wrap wrap-wide">
+    <div class="feat" id="feat"></div>
+    <p class="feat-note">Fees and terms change often. Check the firm's own page before you buy.</p>
+  </div>
+</section>
+
+<div class="lvl wrap-wide" id="perk"><span class="tag">02 &middot; On top, from me</span><span class="ln"></span><span class="nd"></span></div>
+<section style="padding-top:clamp(24px,3.4vw,40px)">
+  <div class="wrap wrap-wide">
+    <div class="perk rv">
+      <div class="perk-l">
+        <span class="perk-tag">Nobody else gives you this</span>
+        <h2>Sign up with my code and <span class="sl">Levl Up</span> is on me for a month.</h2>
+        <p>The discount you get is theirs. The month of the indicator is mine, and it costs you nothing extra. Use my code at one of the <span id="perk-n">four</span> below, then send the confirmation to <a href="mailto:help@levlhq.com">help@levlhq.com</a> or DM me on X. It is on your account the same day.</p>
+        <div class="perk-names" id="perk-names"></div>
+      </div>
+      <div class="perk-r">
+        <div class="perk-card">
+          <span class="brand">levl<span class="cur"></span><span class="up">Up</span></span>
+          <div class="perk-num">1<em>month free</em></div>
+          <div class="perk-strike">claim by mail or DM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lvl wrap-wide" id="compare"><span class="tag">03 &middot; Compare</span><span class="ln"></span><span class="nd"></span></div>
+<section style="padding-top:clamp(28px,4vw,44px)">
+  <div class="wrap wrap-wide">
+
+    <div class="tabs rv">
+      <button class="tab on" data-tab="tools">Tools &amp; platforms <span class="ct" id="c-tools"></span></button>
+      <button class="tab" data-tab="firms">Prop firms <span class="ct" id="c-firms"></span></button>
+    </div>
+
+    <div class="tbar rv">
+      <div>
+        <h2 id="tbar-h">The tools around the trade</h2>
+        <p id="tbar-p">Charting, copying and automation. The pieces that sit either side of the platform you click in.</p>
+      </div>
+      <div class="srch">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+        <input id="q" type="search" placeholder="Filter by name" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="tw rv">
+      <div class="tscroll"><table class="cmp"><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<div class="lvl wrap-wide" id="how"><span class="tag">04 &middot; How this works</span><span class="ln"></span><span class="nd"></span></div>
+<section style="padding-top:clamp(28px,4vw,44px)">
+  <div class="wrap wrap-wide">
+    <div class="rules rv">
+      <div class="fcol">
+        <span class="no">01</span>
+        <h3>You pay the same or less</h3>
+        <p>A partner link never raises your price. Where a code exists it is the best one I can get, and it is written on the card instead of hidden in a video description.</p>
+      </div>
+      <div class="fcol">
+        <span class="no">02</span>
+        <h3>Not everything here has a deal</h3>
+        <p>With some of these I have a partner link, with some I have applied for one, with some it will never happen. They are on the list either way. A missing link just means a missing link.</p>
+      </div>
+      <div class="fcol">
+        <span class="no">03</span>
+        <h3>It pays for what comes next</h3>
+        <p>The Cockpit will be free, run no ads and sell no data. This is how that works. It also pays for the next tool, which is being built right now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap wrap-wide">
+    <div class="final rv">
+      <h2>Passing the eval is the easy half<span class="dot-b">.</span></h2>
+      <p>Keeping the account is where most traders lose it. That is what the journal and the indicator are for.</p>
+      <div class="cta">
+        <a class="btn btn-lg btn-paper" href="/cockpit/">See the Cockpit <span class="arw">&rarr;</span></a>
+        <a class="btn btn-lg btn-ghost" href="/levl-up/" style="border-color:rgba(255,255,255,.25);color:#E8EBEF">See Levl Up</a>
+      </div>
+      <div class="cta-note2">Cockpit coming soon &middot; Levl Up from $7.50 a month</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap wrap-wide">
+    <div class="f-top">
+      <div class="f-brand">
+        <span class="brand">levl<span class="cur"></span></span>
+        <span class="f-tag">Cut the noise.</span>
+      </div>
+      <p class="disc">Levl builds charting and journalling tools. Nothing on this site is financial advice and no result is guaranteed. Trading carries a substantial risk of loss. Some links to partners are affiliate links and Levl may earn a commission, which never changes what you pay. See <a href="/disclaimer.html">Risk &amp; Disclosure</a>.</p>
+      <div class="f-nav">
+        <a href="/">Home</a>
+        <a href="/levl-up/">Levl Up</a>
+        <a href="/cockpit/">Cockpit</a>
+        <a href="/partners/">Partners</a>
+        <a href="https://x.com/jules_levlhq">X</a>
+      </div>
+    </div>
+    <div class="f-bot">
+      <span>&copy; <span id="yr">2026</span> Levl. All rights reserved.</span>
+      <a href="/legal.html">Legal</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/levl.js"></script>
+<script>
+/* ==========================================================================
+   PARTNERS DATA — everything on this page renders from FIRMS and TOOLS.
+
+   Turning a deal live is one object, never a layout change:
+     deal:{label:'30% off', code:'JULES', ref:'https://...', bonus:'+1 month Levl Up'}
+   Leave deal:null and the row shows "No deal" and links to the firm normally.
+
+   Logos are not set here. They are mapped by key in the LOGOS table further down,
+   and the files live in ../assets/partners/ (see the README there).
+
+     card:'hero'   -> big highlighted middle card (one only)
+     card:true     -> side card in the featured row
+     fee/feeNum    -> display string + number for sorting
+     mo:true       -> price is per month rather than one off
+   ========================================================================== */
+var FIRMS=[
+  {key:'tpt', name:'Take Profit Trader', mark:'TPT', grad:'linear-gradient(135deg,hsl(6 66% 54%),hsl(34 64% 46%))',
+   country:'US', flag:'🇺🇸', years:4, rating:4.4, reviews:61,
+   plat:['TradingView','Tradovate'], platMore:4,
+   fee:'From $90', feeNum:90, split:'80%', splitNum:80, alloc:'$750K', allocNum:750000,
+   lead:'Pays you from the first day you are in profit instead of making you wait out a full cycle.',
+   deal:null, site:'https://takeprofittrader.com/', card:true},
+
+  {key:'lucid', name:'Lucid Trading', mark:'LT', grad:'linear-gradient(135deg,hsl(214 64% 52%),hsl(256 66% 36%))',
+   country:'US', flag:'🇺🇸', years:1, rating:4.7, reviews:315,
+   plat:['TradingView','Tradovate'], platMore:4,
+   fee:'From $70', feeNum:70, split:'90%', splitNum:90, alloc:'$750K', allocNum:750000,
+   lead:'End-of-day trailing max loss on every account, a flat 90% split, and payouts that process in minutes rather than days.',
+   deal:{label:'Always max discount', code:'JULES', ref:'https://lucidtrading.com/ref/jules_levlhq',
+         bonus:'+1 month Levl Up'},
+   site:'https://lucidtrading.com/', card:'hero'},
+
+  {key:'tradeify', name:'Tradeify', mark:'TF', grad:'linear-gradient(135deg,hsl(150 58% 42%),hsl(188 62% 40%))',
+   country:'US', flag:'🇺🇸', years:2, rating:4.6, reviews:176,
+   plat:['TradingView','Tradovate Prop'], platMore:2,
+   fee:'From $59', feeNum:59, split:'Up to 90%', splitNum:90, alloc:'$750K', allocNum:750000,
+   lead:'Instant funding with no evaluation phase, and one of the cheapest tickets in the table.',
+   deal:null, site:'https://tradeify.co/', card:true},
+
+  {key:'mff', name:'My Funded Futures', mark:'MFF', grad:'linear-gradient(135deg,hsl(268 58% 52%),hsl(310 56% 40%))',
+   country:'US', flag:'🇺🇸', years:3, rating:4.9, reviews:324,
+   plat:['TradingView','Tradovate','NinjaTrader'], platMore:0,
+   fee:'From $77', feeNum:77, mo:true, split:'Up to 90%', splitNum:90, alloc:'$750K', allocNum:750000,
+   deal:null, site:'https://myfundedfutures.com/'},
+
+  {key:'apex', name:'Apex Trader Funding', mark:'AP', grad:'linear-gradient(135deg,hsl(28 66% 52%),hsl(48 62% 42%))',
+   country:'US', flag:'🇺🇸', years:5, rating:4.4, reviews:109,
+   plat:['Tradovate','NinjaTrader'], platMore:2,
+   fee:'From $137', feeNum:137, split:'90%', splitNum:90, alloc:'$3M', allocNum:3000000,
+   deal:null, site:'https://apextraderfunding.com/'},
+
+  {key:'fnf', name:'FundedNext Futures', mark:'FN', grad:'linear-gradient(135deg,hsl(202 66% 48%),hsl(232 60% 40%))',
+   country:'AE', flag:'🇦🇪', years:1, rating:4.5, reviews:67,
+   plat:['TradingView','Tradovate Prop','NinjaTrader'], platMore:0,
+   fee:'From $70', feeNum:70, split:'80%', splitNum:80, alloc:'$500K', allocNum:500000,
+   deal:null, site:'https://fundednext.com/'},
+
+  {key:'e8', name:'E8 Markets', mark:'E8', grad:'linear-gradient(135deg,hsl(186 60% 44%),hsl(214 64% 40%))',
+   country:'US', flag:'🇺🇸', years:5, rating:4.4, reviews:14,
+   plat:['Tradovate'], platMore:0,
+   fee:'From $110', feeNum:110, split:'80%', splitNum:80, alloc:'$750K', allocNum:750000,
+   deal:null, site:'https://e8markets.com/'},
+
+  {key:'topstep', name:'Topstep', mark:'TS', grad:'linear-gradient(135deg,hsl(160 60% 42%),hsl(202 64% 36%))',
+   country:'US', flag:'🇺🇸', years:14, rating:3.4, reviews:38,
+   plat:['Project X'], platMore:0,
+   fee:'From $49', feeNum:49, mo:true, split:'90%', splitNum:90, alloc:'$750K', allocNum:750000,
+   deal:null, site:'https://topstep.com/'}
+];
+
+/* Charting, copiers and automation. Same page, different columns. */
+var TOOLS=[
+  {key:'tv', name:'TradingView', mark:'TV', grad:'linear-gradient(135deg,hsl(214 70% 54%),hsl(196 66% 44%))',
+   cat:'Charting', what:'Where Levl Up runs. Alerts are the part that matters here, and those need a paid plan.',
+   price:'Free plan available',
+   deal:{label:'$15 credit', ref:'https://www.tradingview.com/jules?aff_id=169281',
+         bonus:'+1 month Levl Up'},
+   site:'https://www.tradingview.com/'},
+
+  {key:'tradecopia', name:'Tradecopia', mark:'TC', grad:'linear-gradient(135deg,hsl(190 62% 46%),hsl(232 60% 38%))',
+   cat:'Trade copier', what:'Copies one account to all your funded accounts at once, so passing four evals does not mean clicking four times. Seven days free before anything is charged.',
+   price:'From $49.99 / month',
+   deal:{label:'30% off month one', code:'THEGTRADES', ref:'https://portal.tradecopia.com/signup-affiliate?via=THEGTRADES',
+         bonus:'+1 month Levl Up'},
+   site:'https://tradecopia.com/'},
+
+  {key:'traderspost', name:'TradersPost', mark:'TP', grad:'linear-gradient(135deg,hsl(28 62% 52%),hsl(6 62% 48%))',
+   cat:'Automation', what:'Turns a TradingView alert into a real order at your broker. The bridge a strategy crosses to become a bot.',
+   price:'Free tier, paid plans',
+   deal:{label:'20% off', code:'LEVL', ref:'https://traderspost.io/?via=juleslevlhq',
+         bonus:'+1 month Levl Up'},
+   site:'https://traderspost.io/'}
+];
+
+/* Logo files live in ../assets/partners/, one per key. Remove an entry here and
+   that row falls back to the coloured initials tile, so a missing file is never
+   a broken image. Collected from each company's own site on 2 August 2026. */
+var LOGOS={
+  tpt:'tpt.svg', tradeify:'tradeify.png', lucid:'lucid.png', mff:'mff.png',
+  apex:'apex.png', fnf:'fnf.png', e8:'e8.png', topstep:'topstep.png',
+  tv:'tv.png', tradecopia:'tradecopia.png', traderspost:'traderspost.png'
+};
+function logo(f){return LOGOS[f.key]?'../assets/partners/'+LOGOS[f.key]:null;}
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function stars(r){
+  var pct=Math.max(0,Math.min(100,(r/5)*100));
+  return '<span class="stars"><span class="bg">★★★★★</span>'
+       + '<span class="fg" style="width:'+pct.toFixed(1)+'%">★★★★★</span></span>';
+}
+function plats(f){
+  var out=f.plat.map(function(p){return '<span class="chip">'+esc(p)+'</span>';}).join('');
+  if(f.platMore>0)out+='<span class="chip more">+'+f.platMore+'</span>';
+  return '<div class="t-plat">'+out+'</div>';
+}
+function href(f){return f.deal?f.deal.ref:f.site;}
+function rel(f){return f.deal?' rel="sponsored nofollow noopener" target="_blank"':' rel="nofollow noopener" target="_blank"';}
+
+/* superlatives, worked out from the data rather than typed in by hand */
+var minFee=Math.min.apply(null,FIRMS.map(function(f){return f.feeNum;}));
+var maxAlloc=Math.max.apply(null,FIRMS.map(function(f){return f.allocNum;}));
+var maxRate=Math.max.apply(null,FIRMS.map(function(f){return f.rating;}));
+/* the badge compares one-off fees only, so a monthly plan cannot win it on a
+   number that is not the same kind of number */
+var minFeeOnce=Math.min.apply(null,FIRMS.filter(function(f){return !f.mo;})
+                                       .map(function(f){return f.feeNum;}));
+var biggest=FIRMS.filter(function(f){return f.allocNum===maxAlloc;})[0];
+var given={};
+function badge(f){
+  /* one winner per superlative, so a tie does not print the same badge twice */
+  if(f.rating===maxRate&&!given.r)   {given.r=1;return '<span class="badge b1">Top rated</span>';}
+  if(f.allocNum===maxAlloc&&!given.a){given.a=1;return '<span class="badge b2">Scales furthest</span>';}
+  if(f.feeNum===minFeeOnce&&!f.mo&&!given.f){given.f=1;return '<span class="badge b3">Cheapest way in</span>';}
+  return '';
+}
+
+/* Which partners carry the free Levl Up month. Driven by deal.bonus, so the
+   block below and the table can never disagree with each other. */
+var WITH_BONUS=FIRMS.concat(TOOLS).filter(function(x){return x.deal&&x.deal.bonus;});
+document.getElementById('perk-names').innerHTML=
+  WITH_BONUS.map(function(x){return '<span>'+esc(x.name)+'</span>';}).join('');
+/* written out, and counted from the data so the sentence cannot go stale */
+var WORDS=['none','one','two','three','four','five','six','seven','eight','nine'];
+document.getElementById('perk-n').textContent=WORDS[WITH_BONUS.length]||WITH_BONUS.length;
+
+/* ---------- hero stats ---------- */
+document.getElementById('hstats').innerHTML=[
+  ['$'+minFee,'cheapest entry'],
+  [biggest.alloc,'largest account'],
+  [maxRate.toFixed(1)+'/5','best rated']
+].map(function(s){return '<span class="hstat"><b>'+s[0]+'</b><span>'+s[1]+'</span></span>';}).join('');
+
+/* ---------- featured ---------- */
+document.getElementById('feat').innerHTML=FIRMS.filter(function(f){return f.card;}).map(function(f){
+  var big=f.card==='hero',live=!!f.deal;
+  return '<div class="fc'+(big?' hero-card':'')+'">'
+    +'<div class="fc-ribbon">'+(live?'My deal &middot; code inside':'No deal yet')+'</div>'
+    +'<div class="fc-in">'
+      +'<div class="fc-head">'
+        +(logo(f)?'<div class="fc-mark img"><img src="'+esc(logo(f))+'" alt="'+esc(f.name)+'"></div>'
+                 :'<div class="fc-mark" style="background:'+f.grad+'">'+esc(f.mark)+'</div>')
+        +'<div><h3>'+esc(f.name)+'</h3><div class="fc-sub">'+(live?esc(f.deal.label):'Futures prop firm')+'</div></div>'
+      +'</div>'
+      +'<div class="fc-rows">'
+        +'<div class="fc-row"><span class="k"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 11h20"/></svg>Challenge fee</span><span class="v">'+esc(f.fee)+(f.mo?' <i>/mo</i>':'')+'</span></div>'
+        +'<div class="fc-row"><span class="k"><svg viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>Profit split</span><span class="v">'+esc(f.split)+'</span></div>'
+        +'<div class="fc-row"><span class="k"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Max funding</span><span class="v">'+esc(f.alloc)+'</span></div>'
+        +'<div class="fc-row"><span class="k"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.5 6 .9-4.3 4.3 1 6.1L12 17l-5.3 2.8 1-6.1L3.4 9.4l6-.9z"/></svg>Trustpilot</span><span class="v">'+f.rating.toFixed(1)+' / 5</span></div>'
+      +'</div>'
+      +(live
+        ? '<div class="fc-deal on"><span><span class="fcd-l">Code</span><span class="fcd-v" id="cb-'+f.key+'">'+esc(f.deal.code)+'</span></span>'
+          +'<button class="cb-c" onclick="copyCode(\''+f.key+'\',this)">Copy</button></div>'
+          +(f.deal.bonus?'<div class="fc-bonus">'+esc(f.deal.bonus)+' <span>on top, from me</span></div>':'')
+        : '<div class="fc-deal"><span><span class="fcd-l">Code</span><span class="fcd-v">&mdash;</span></span>'
+          +'<span class="fcd-l">no partner link</span></div>')
+      +'<div class="fc-cta"><a class="btn '+(big?'btn-ink':'btn-ghost')+'" href="'+esc(href(f))+'"'+rel(f)+'>'
+        +(live?'Claim the discount':'Visit '+esc(f.name))+' <span class="arw">&rarr;</span></a></div>'
+    +'</div></div>';
+}).join('');
+
+/* ---------- table ---------- */
+var TAB='tools',SORT=null,DIR=-1;   /* tools open first: that is where the live deals are */
+
+var COLS={
+  firms:[{t:''},{t:'Firm'},{t:'Trustpilot',k:'rating'},{t:'From',k:'feeNum',d:1},
+         {t:'Split',k:'splitNum'},{t:'Max funding',k:'allocNum'},{t:'Platforms'},{t:'Deal'},{t:''}],
+  tools:[{t:''},{t:'Tool'},{t:'Category'},{t:'What it does'},{t:'Pricing'},{t:'Deal'},{t:''}]
+};
+var COPY={
+  firms:['Every firm, one table','Tap a column to sort. The cheapest way in is rarely the one with the best split.'],
+  tools:['The tools around the trade','Charting, copying and automation. The pieces that sit either side of the platform you click in.']
+};
+
+function head(){
+  return '<tr>'+COLS[TAB].map(function(c){
+    if(!c.k)return '<th>'+c.t+'</th>';
+    var on=SORT===c.k;
+    return '<th class="s'+(on?' act':'')+'" data-k="'+c.k+'" data-d="'+(c.d||-1)+'">'+c.t
+      +'<span class="ar">'+(on?(DIR===1?'▲':'▼'):'⇅')+'</span></th>';
+  }).join('')+'</tr>';
+}
+function dealCell(f){
+  if(!f.deal)return '<span class="t-none">No deal</span>';
+  return '<span class="t-deal">'+esc(f.deal.label)+(f.deal.code?' &middot; '+esc(f.deal.code):'')+'</span>'
+    +(f.deal.bonus?'<span class="t-bonus">'+esc(f.deal.bonus)+'</span>':'');
+}
+function rowFirm(f,i){
+  return '<tr'+(f.deal?' class="mine"':'')+'>'
+    +'<td class="t-rank">'+(i+1)+'</td>'
+    +'<td><div class="t-firm">'
+      +(logo(f)?'<span class="t-mark img"><img src="'+esc(logo(f))+'" alt=""></span>'
+               :'<span class="t-mark" style="background:'+f.grad+'">'+esc(f.mark)+'</span>')
+      +'<span><span class="t-name">'+esc(f.name)+'</span>'
+      +'<span class="t-meta">'+f.flag+' '+esc(f.country)+' &middot; '+f.years+(f.years===1?' yr':' yrs')+'</span>'
+      +badge(f)+'</span>'
+    +'</div></td>'
+    +'<td>'+stars(f.rating)+'<span class="t-rate">'+f.rating.toFixed(1)+' &middot; '+f.reviews+' reviews</span></td>'
+    +'<td><span class="t-mono">'+esc(f.fee.replace('From ',''))+(f.mo?' <i>/mo</i>':'')+'</span></td>'
+    +'<td><span class="t-mono">'+esc(f.split)+'</span></td>'
+    +'<td><span class="t-mono">'+esc(f.alloc)+'</span></td>'
+    +'<td>'+plats(f)+'</td>'
+    +'<td>'+dealCell(f)+'</td>'
+    +'<td class="t-act"><a class="btn-xs'+(f.deal?' on':'')+'" href="'+esc(href(f))+'"'+rel(f)+'>'+(f.deal?'Claim':'Visit')+'</a></td>'
+  +'</tr>';
+}
+function rowTool(t,i){
+  return '<tr'+(t.deal?' class="mine"':'')+'>'
+    +'<td class="t-rank">'+(i+1)+'</td>'
+    +'<td><div class="t-firm">'
+      +(logo(t)?'<span class="t-mark img"><img src="'+esc(logo(t))+'" alt=""></span>'
+               :'<span class="t-mark" style="background:'+t.grad+'">'+esc(t.mark)+'</span>')
+      +'<span class="t-name">'+esc(t.name)+'</span>'
+    +'</div></td>'
+    +'<td><span class="chip">'+esc(t.cat)+'</span></td>'
+    +'<td><span class="t-what">'+esc(t.what)+'</span></td>'
+    +'<td><span class="t-mono">'+esc(t.price)+'</span></td>'
+    +'<td>'+dealCell(t)+'</td>'
+    +'<td class="t-act"><a class="btn-xs'+(t.deal?' on':'')+'" href="'+esc(href(t))+'"'+rel(t)+'>'+(t.deal?'Claim':'Visit')+'</a></td>'
+  +'</tr>';
+}
+
+function draw(){
+  var q=(document.getElementById('q').value||'').trim().toLowerCase();
+  var rows=(TAB==='firms'?FIRMS:TOOLS).filter(function(x){return !q||x.name.toLowerCase().indexOf(q)>-1;});
+  if(SORT)rows=rows.slice().sort(function(a,b){return (a[SORT]-b[SORT])*DIR;});
+  given={};   /* badges are handed out fresh on every draw */
+  document.getElementById('thead').innerHTML=head();
+  document.getElementById('tbody').innerHTML=rows.length
+    ? rows.map(TAB==='firms'?rowFirm:rowTool).join('')
+    : '<tr><td colspan="'+COLS[TAB].length+'"><div class="empty">Nothing matches “'+esc(q)+'”.</div></td></tr>';
+  document.getElementById('tbar-h').textContent=COPY[TAB][0];
+  document.getElementById('tbar-p').textContent=COPY[TAB][1];
+  Array.prototype.forEach.call(document.querySelectorAll('#thead th.s'),function(th){
+    th.addEventListener('click',function(){
+      var k=th.dataset.k;
+      if(SORT===k){DIR=-DIR;}else{SORT=k;DIR=parseInt(th.dataset.d,10);}
+      draw();
+    });
+  });
+}
+
+document.getElementById('c-firms').textContent=FIRMS.length;
+document.getElementById('c-tools').textContent=TOOLS.length;
+
+Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(b){
+  b.addEventListener('click',function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(x){x.classList.remove('on');});
+    b.classList.add('on');TAB=b.dataset.tab;SORT=null;DIR=-1;draw();
+  });
+});
+document.getElementById('q').addEventListener('input',draw);
+draw();
+
+function copyCode(k,btn){
+  var v=document.getElementById('cb-'+k).textContent.trim();
+  if(navigator.clipboard)navigator.clipboard.writeText(v);
+  btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy';},1600);
+}
+</script>
+</body>
+</html>

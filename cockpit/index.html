@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Levl Cockpit — A trading journal that bends to how you trade (coming soon)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Coming soon: a free trading journal you can shape. Your own forms, your own dashboard, your own widgets, plus trades, imports, backtests, strategies and market news in one place.">
+<link rel="canonical" href="https://levlhq.com/cockpit/">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png?v=2">
+<meta name="theme-color" content="#F2F3F1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Levl">
+<meta property="og:title" content="Levl Cockpit — A journal that bends to how you trade">
+<meta property="og:description" content="Your own forms, your own dashboard, your own widgets. Plus trades, imports, backtests, strategies and market news. Free at launch.">
+<meta property="og:url" content="https://levlhq.com/cockpit/">
+<meta property="og:image" content="https://levlhq.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Levl Cockpit — A journal that bends to how you trade">
+<meta name="twitter:description" content="Your own forms, your own dashboard, your own widgets. Free at launch, web and mobile.">
+<meta name="twitter:image" content="https://levlhq.com/og.png">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/levl.css">
+<style>
+  .hero{padding:clamp(48px,7vw,88px) 0 clamp(28px,4vw,48px)}
+  .hero .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center}
+  .hero h1{font-weight:900;font-size:clamp(36px,5vw,66px);line-height:1.0;letter-spacing:-.045em;color:var(--ink);max-width:14ch}
+  .hero .sub{font-size:clamp(16px,1.9vw,20px);color:var(--muted);max-width:48ch;margin-top:24px;font-weight:500}
+  .hero .sub b{color:var(--text);font-weight:700}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+  .proofline{font-family:var(--mono);font-size:12.5px;color:var(--faint);margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .proofline .sep{color:var(--line2)}
+  .proofline b{color:var(--text);font-weight:700}
+  @media(max-width:900px){.hero .grid{grid-template-columns:1fr}}
+
+  .soon-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#B4700A;
+    border:1px solid rgba(180,112,10,.32);background:rgba(180,112,10,.08);
+    border-radius:100px;padding:7px 14px;margin-bottom:20px}
+
+  .shot{border-radius:12px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 40px 90px -46px rgba(14,17,22,.7)}
+  .shot img{display:block;width:100%;height:auto}
+
+  /* app frame mock (kept for reference, currently unused) */
+  .app{border:1px solid var(--line2);background:var(--ink);border-radius:12px;overflow:hidden;
+    box-shadow:0 40px 90px -46px rgba(14,17,22,.7)}
+  .app-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.08);background:#12161D}
+  .app-bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16);display:block}
+  .app-bar span{font-family:var(--mono);font-size:10.5px;color:#6B7688;margin-left:8px}
+  .app-body{display:grid;grid-template-columns:104px 1fr;min-height:280px}
+  .app-nav{border-right:1px solid rgba(255,255,255,.07);padding:12px 0}
+  .app-nav b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:#5B90FF;padding:6px 12px}
+  .app-nav u{display:block;text-decoration:none;font-family:var(--mono);font-size:10px;color:#6B7688;padding:6px 12px}
+  .app-nav u.on{color:#E8EBEF;border-left:2px solid #5B90FF;background:rgba(91,144,255,.07)}
+  .app-main{padding:16px 18px}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  .kpi{border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:10px 11px;background:rgba(255,255,255,.03)}
+  .kpi span{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#5F6976}
+  .kpi b{display:block;font-family:var(--mono);font-size:14px;color:#E8EBEF;margin-top:3px}
+  .kpi b.g{color:#34C77B}.kpi b.r{color:#FF8A8A}
+  .bar{margin-top:12px;border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:11px 12px;background:rgba(255,255,255,.03)}
+  .bar .lb{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:#6B7688}
+  .bar .tr{height:6px;border-radius:4px;background:rgba(255,255,255,.09);margin-top:7px;overflow:hidden}
+  .bar .fl{height:100%;background:linear-gradient(90deg,#2E6BF0,#34C77B);width:0;animation:grow 1.6s cubic-bezier(.3,.8,.3,1) .4s forwards}
+  @keyframes grow{to{width:68%}}
+  .spark{margin-top:12px;border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:10px 12px 6px;background:rgba(255,255,255,.03)}
+  .spark svg{display:block;width:100%;height:auto}
+  .draw{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2s cubic-bezier(.4,0,.2,1) .5s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  /* rule strip */
+  .rules{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line2);background:var(--paper2)}
+  .rule{padding:clamp(22px,2.6vw,32px);border-right:1px solid var(--line)}
+  .rule:last-child{border-right:0}
+  .rule .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sig)}
+  .rule h3{font-weight:800;font-size:clamp(17px,1.9vw,20px);letter-spacing:-.02em;margin:10px 0 8px;color:var(--ink)}
+  .rule p{color:var(--muted);font-size:14px}
+  @media(max-width:860px){.rules{grid-template-columns:1fr}.rule{border-right:0;border-bottom:1px solid var(--line)}.rule:last-child{border-bottom:0}}
+
+  .price-box{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(26px,4vw,54px);align-items:center}
+  @media(max-width:820px){.price-box{grid-template-columns:1fr}}
+  .free-tag{font-family:var(--disp);font-weight:900;font-size:clamp(46px,7vw,86px);letter-spacing:-.05em;color:#F2F4F6;line-height:1}
+  .free-sub{font-family:var(--mono);font-size:12.5px;color:#8A93A0;margin-top:6px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap wrap-wide">
+    <div class="nav-l">
+      <a class="brand" href="/">levl<span class="cur"></span></a>
+      <span class="brand-page">Cockpit</span>
+    </div>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-r">
+      <a class="lnk" href="/levl-up/">Levl Up</a>
+      <a class="lnk on" href="/cockpit/">Cockpit</a>
+      <a class="lnk" href="/partners/">Partners</a>
+      <a class="btn btn-sm btn-ink" href="https://x.com/jules_levlhq">Follow the build</a>
+    </div>
+  </div>
+</nav>
+
+<div class="rail">
+  <div class="wrap wrap-wide">
+    <a href="#inside">Inside</a>
+    <a href="#data">Your data</a>
+    <a href="#price">Price</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</div>
+
+<main>
+
+<header class="hero">
+  <div class="wrap wrap-wide">
+    <div class="grid">
+      <div>
+        <span class="soon-pill rv in">&#9679; Coming soon</span>
+        <h1 class="rv in">Your trading, on the record.</h1>
+        <p class="sub rv in d1">Every journal I ever bought was built around how someone else trades. <b>This one bends to you.</b> Build your own forms, arrange your own dashboard, keep only the widgets you actually read. Trades, imports, backtests, strategies and market headlines, all in one place.</p>
+        <div class="hero-cta rv in d2">
+          <a class="btn btn-ink" href="https://x.com/jules_levlhq">Follow the build <span class="arw">→</span></a>
+          <a class="btn btn-ghost" href="#inside">See what is inside</a>
+        </div>
+        <div class="proofline rv in d3">
+          <span>Not open yet</span><span class="sep">/</span>
+          <span><b>Free</b> when it is</span><span class="sep">/</span>
+          <span>Phone and desktop</span><span class="sep">/</span>
+          <span>English &amp; Deutsch</span>
+        </div>
+      </div>
+
+      <div class="shot rv in d2"><img src="../assets/cockpit-hero.jpg" alt="The Levl Cockpit dashboard: net PnL, profit factor, win rate, PnL calendar and the cumulative equity curve" loading="lazy"></div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 INSIDE -->
+<div class="lvl wrap-wide" id="inside"><span class="tag">01 · Inside</span><span class="ln"></span><span class="nd"></span></div>
+<section style="padding-top:clamp(28px,4vw,44px)">
+  <div class="wrap wrap-wide">
+    <div class="shead rv">
+      <h2>It starts as mine. Then it becomes yours.</h2>
+      <p>Out of the box the Cockpit is set up exactly the way I journal. <b>Every part of it can be changed</b>, and if a widget you need is missing, ask me and I will build it.</p>
+    </div>
+    <div class="cols3 rv d1">
+      <div class="fcol">
+        <span class="no">01</span>
+        <h3>Make it yours</h3>
+        <p>The reason this exists. Nothing I ever bought fit the way I actually work, so nothing here is fixed.</p>
+        <ul>
+          <li>Build your own trade form, field by field</li>
+          <li>Arrange the dashboard, keep the widgets you read</li>
+          <li>Your own setups, tags and rule sets</li>
+          <li>Missing a widget? Ask, and it gets built</li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <span class="no">02</span>
+        <h3>The whole session, one place</h3>
+        <p>Not five tabs and a spreadsheet. Everything a trading day produces, next to each other.</p>
+        <ul>
+          <li>Trades with screenshots, or a broker CSV import</li>
+          <li>Backtests tracked and evaluated like live trades</li>
+          <li>Strategies and playbooks with their own rules</li>
+          <li>Market headlines from FinancialJuice in the app</li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <span class="no">03</span>
+        <h3>Stats that answer something</h3>
+        <p>Not a wall of numbers. The ones that change what you do on Monday.</p>
+        <ul>
+          <li>Expectancy, Ø R and R-distribution</li>
+          <li>PnL by weekday and session</li>
+          <li>Discipline streak and rule breaks</li>
+          <li>An equity curve you can actually read</li>
+          <li>And more, with new ones added as they are asked for</li>
+        </ul>
+      </div>
+    </div>
+    <p class="rv d2" style="font-family:var(--mono);font-size:12.5px;color:var(--faint);margin-top:20px">
+      And the feature I am most excited about is not on this page yet. It is the reason the Cockpit lives online instead of on your desktop. <b style="color:var(--sig)">Stay tuned.</b>
+    </p>
+  </div>
+</section>
+
+<!-- 02 DATA -->
+<div class="lvl wrap-wide" id="data"><span class="tag">02 · Your data</span><span class="ln"></span><span class="nd"></span></div>
+<section style="padding-top:clamp(28px,4vw,44px)">
+  <div class="wrap wrap-wide">
+    <div class="cols2 rv">
+      <div>
+        <div class="shead" style="margin-bottom:0">
+          <h2>It stays yours.</h2>
+          <p>Your journal is the most honest document you own. It should not be a growth asset for someone else.</p>
+        </div>
+      </div>
+      <div class="fcol" style="border-top-color:var(--sig)">
+        <ul style="margin-top:0">
+          <li>Everything works offline first: the app runs from your device, the cloud is a copy</li>
+          <li>Your cloud row is yours alone, enforced at database level</li>
+          <li>Export the whole journal as one file, any time, no plan required</li>
+          <li><span>AI is optional and uses <b style="color:var(--text)">your</b> API key. Nothing is sent anywhere unless you connect one</span></li>
+          <li>No ad networks, no data selling. Ever, and it is written down.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PRICE -->
+<div class="lvl wrap-wide" id="price"><span class="tag">03 · Price</span><span class="ln"></span><span class="nd"></span></div>
+<section style="padding-top:clamp(28px,4vw,44px)">
+  <div class="wrap wrap-wide">
+    <div class="island rv">
+      <div class="price-box">
+        <div>
+          <h2>Free to use, free to leave.</h2>
+          <p class="lead">A journal only works if you open it every day, and putting a paywall in front of that habit is the fastest way to stop it forming. So the Cockpit launches free, and the core journal stays free.</p>
+          <ul class="check">
+            <li>Log every trade, account, backtest and strategy</li>
+            <li>Every custom form, widget and stat on this page</li>
+            <li>No card, no trial countdown</li>
+            <li>Export everything in one file, any time</li>
+          </ul>
+        </div>
+        <div style="text-align:center">
+          <div class="free-tag">$0</div>
+          <div class="free-sub">at launch</div>
+          <a class="btn btn-lg btn-paper" href="https://x.com/jules_levlhq" style="margin-top:22px">Tell me when it opens <span class="arw">→</span></a>
+          <div class="free-sub" style="margin-top:12px">I post every build step on X</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<div class="lvl wrap-wide" id="faq"><span class="tag">04 · FAQ</span><span class="ln"></span><span class="nd"></span></div>
+<section style="padding-top:clamp(28px,4vw,44px)">
+  <div class="wrap wrap-wide">
+    <div class="faq rv">
+      <details>
+        <summary>Do I need Levl Up to use the Cockpit? <span class="pm">+</span></summary>
+        <div class="a">No. They are separate products and neither requires the other. The Cockpit does not care which strategy or indicator you trade.</div>
+      </details>
+      <details>
+        <summary>Will it stay free? <span class="pm">+</span></summary>
+        <div class="a">The core journal will. It opens free, no card and no countdown, and I have no interest in taking that away from anyone who has built a habit on it. Whatever else the Cockpit grows into, I would rather build it properly first than announce prices for things that do not exist yet.</div>
+      </details>
+      <details>
+        <summary>Is there an app for my phone? <span class="pm">+</span></summary>
+        <div class="a">Yes. The Cockpit installs to your home screen straight from the browser and then behaves like a normal app, full screen and offline capable. No app store, no download, and it works the same on iPhone and Android. Native App Store versions come later.</div>
+      </details>
+      <details>
+        <summary>Which brokers can I import from? <span class="pm">+</span></summary>
+        <div class="a">Any that export a CSV. The importer detects the delimiter, matches German and English column names, handles Kauf/Verkauf and Buy/Sell, and maps contract symbols like “NQ 09-26” back to NQ. If a file will not map, send it to help@levlhq.com and I will add it.</div>
+      </details>
+      <details>
+        <summary>What happens to my data if I stop using it? <span class="pm">+</span></summary>
+        <div class="a">Export it as a single file before you go. It contains every trade, note and setting. Deleting your account removes the cloud copy for good.</div>
+      </details>
+      <details>
+        <summary>Why should I trust a journal from a one-person company? <span class="pm">+</span></summary>
+        <div class="a">Because the export button is the answer to that question, and it has no conditions on it. Everything I could use to lock you in (your data, the price, a required subscription) is deliberately absent.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap wrap-wide">
+    <div class="final rv">
+      <h2>Almost ready<span class="dot-b">.</span></h2>
+      <p>The trades you take this week are the only data set that describes you. The Cockpit is being finished right now, and I post every step of it. Be there when it opens.</p>
+      <div class="cta">
+        <a class="btn btn-lg btn-paper" href="https://x.com/jules_levlhq">Follow the build <span class="arw">→</span></a>
+        <a class="btn btn-lg btn-ghost" href="/levl-up/" style="border-color:rgba(255,255,255,.25);color:#E8EBEF">See Levl Up</a>
+      </div>
+      <div class="cta-note2">Free at launch · no card · your data exports in one click</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap wrap-wide">
+    <div class="f-top">
+      <div class="f-brand">
+        <span class="brand">levl<span class="cur"></span></span>
+        <span class="f-tag">Cut the noise.</span>
+      </div>
+      <p class="disc">Levl builds charting and journalling tools. Nothing on this site is financial advice and no result is guaranteed. Trading carries a substantial risk of loss. Some links to partners are affiliate links and Levl may earn a commission, which never changes what you pay. See <a href="/disclaimer.html">Risk &amp; Disclosure</a>.</p>
+      <div class="f-nav">
+        <a href="/">Home</a>
+        <a href="/levl-up/">Levl Up</a>
+        <a href="/cockpit/">Cockpit</a>
+        <a href="/partners/">Partners</a>
+        <a href="https://x.com/jules_levlhq">X</a>
+      </div>
+    </div>
+    <div class="f-bot">
+      <span>&copy; <span id="yr">2026</span> Levl. All rights reserved.</span>
+      <a href="/legal.html">Legal</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/levl.js"></script>
+</body>
+</html>
