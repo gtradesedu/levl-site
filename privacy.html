@@ -70,10 +70,11 @@
 </ul>
 
 <h2>5. Optional features that send data elsewhere</h2>
-<p>These only run when you start them. None is on by default.</p>
+<p>The AI features only run when you start them, and none is on by default. The market data below is described separately because part of it loads on its own.</p>
 <ul>
   <li><b>AI features.</b> If you enter your own API key and use the journal chat, the setup recognition or the coach, the relevant journal text and, where applicable, chart screenshots are sent to the provider you selected (Google, OpenAI or Anthropic) for that request. On free API tiers some providers may use submitted content to improve their models. Do not use these features for anything you would not want a third party to see.</li>
-  <li><b>Economic calendar and news.</b> The Cockpit loads public market data. If the direct source is unavailable it retries through a public relay service, which means your IP address is visible to that service. No journal content is ever sent along.</li>
+  <li><b>Economic calendar.</b> High-impact events are loaded through my own Cloudflare worker, never from the original source directly, so no third party sees your IP address. This happens automatically when you open the Daily Outlook, so that the news field can fill itself, and again when you press the calendar button. No journal content is ever sent along. If the worker is unavailable you simply get no calendar.</li>
+  <li><b>News ticker.</b> Opening the News page fetches headlines from financialjuice.com directly, so that site sees your IP address for that request. It loads only when you open that page. No journal content is ever sent along.</li>
 </ul>
 
 <h2>6. Your rights</h2>
