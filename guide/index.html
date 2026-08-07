@@ -146,7 +146,12 @@
     .example{background:#fff;color:#000;border:1px solid #999}
     .example h3,.example b,.example .result{color:#000}
     .example p,.example ol li{color:#222}
-    section{break-inside:avoid-page}
+    /* Sektionen sind zu lang für "ganz oder gar nicht" — das schob volle Seiten leer.
+       Stattdessen nur die kleinen Einheiten zusammenhalten und Überschriften an ihren Text binden. */
+    section{break-inside:auto}
+    dl.set > div{break-inside:avoid}
+    .note,.example,.ptbl tr{break-inside:avoid}
+    h2,h3{break-after:avoid}
     a{color:#000}
     .ptbl th,.ptbl td{border-color:#bbb}
     .ptbl .grp td{background:#eee}
@@ -192,7 +197,9 @@
       <h2>General<span class="accent">Global display settings for the whole indicator.</span></h2>
       <dl class="set">
         <div><dt>Label Size</dt><dd>Size of every text label. <span class="opt">Tiny</span> <span class="opt">Small</span> <span class="opt">Normal</span> <span class="opt">Large</span>. Keep it small on busy charts.</dd></div>
-        <div><dt>Timezone</dt><dd>The display timezone for the candle time labels and the alert session windows (Asia / London / NY). Range UTC-12 to UTC+14. The core day/week logic and the fixed session lines (9:30, 18:00) are always anchored to New York and do not move with this setting. Set it to match how you read the chart, so labels and alert windows line up.</dd></div>
+        <div><dt>Timezone</dt><dd>The display timezone for the candle time labels and the alert session windows (Asia / London / NY). Two kinds of entry: <b>named zones</b> at the top of the list (America/New_York, Europe/London, Europe/Zurich, Asia/Tokyo and others) and <b>fixed offsets</b> below (UTC-12 to UTC+14). Named zones follow daylight saving, fixed offsets do not. The core day/week logic and the session lines are always anchored to New York and do not move with this setting. Set it to match how you read the chart, so labels and alert windows line up.
+          <div class="note" style="margin:10px 0 0"><span class="k">If you run session-filtered alerts</span>Pick the named zone, not the offset. On a fixed offset your Asia / London / NY windows shift by an hour twice a year when the clocks change, and alerts fire an hour early or late until you correct it by hand.</div>
+        </dd></div>
         <div><dt>Bias</dt><dd>The master directional filter. Controls which formations show. <b>Neutral</b> both directions, <b>Bullish</b> only bull, <b>Bearish</b> only bear, <b>Auto</b> the indicator sets bias from daily structure and updates live when price breaks a key level or closes through equilibrium. Learn on Neutral, cut noise with a direction or Auto.</dd></div>
         <div><dt>Show Bias Display</dt><dd>On-chart readout of the current bias. Most useful in Auto.</dd></div>
         <div><dt>ADR</dt><dd>Average Daily Range over 20 days, plus how much price has used today. Controls: position, show, color. Context for whether a move is already extended.</dd></div>
@@ -212,10 +219,23 @@
         <div><dt>CISD</dt><dd>Change in State of Delivery line. The confirmation trigger that makes a formation valid.</dd></div>
         <div><dt>Pending CISD</dt><dd>The next potential CISD level, and where it would form.</dd></div>
         <div><dt>Continuation CISD</dt><dd>After a valid closure, price should continue and form a continuation CISD. That is an entry opportunity.</dd></div>
+        <div><dt>Protected Swings</dt><dd>The levels a move defends on its way. The CISD marks where the move started; Protected Swings marks what it has been protecting since. Every opposing candle series that price closes through gets a line at its open, so you get a staircase of levels instead of a single anchor. Color, on/off, style, width. Default off. Full logic below.</dd></div>
         <div><dt>SMT CISD</dt><dd>A CISD that confirms an SMT divergence. Combines the trigger with divergence for a higher-confluence entry.</dd></div>
         <div><dt>CTF Closure Formation</dt><dd>Candle closure on the chart timeframe itself, for trading directly on a higher TF. Own color and toggle. Only on 15m charts and above.</dd></div>
         <div><dt>Draw only at Key Levels</dt><dd>Show a closure formation only when it forms at a key level. Everything else stays hidden. The whole formation hides as one unit. Hidden formations are not deleted, turn the toggle off and they return. SMT formations always show. Full logic in section 5.</dd></div>
       </dl>
+
+      <h3>Protected Swings in detail</h3>
+      <p class="intro">A move that runs keeps leaving structure behind. Every opposing candle series that price closes through is a level somebody is now defending. Protected Swings draws them one by one as the move develops, so you read where the move has been holding itself up rather than only where it began.</p>
+      <ul class="plain">
+        <li><b>A swing has to form.</b> A line only prints if at least one candle in that leg went beyond its left neighbour (lower low in a bull move, higher high in a bear move). Without it a plain staircase of rising lows would count as a swing, and it should not. A three-candle swing cannot be confirmed live, so this two-candle test is the working approximation.</li>
+        <li><b>The anchor locks.</b> It stays on the series whose extreme still holds. A later series sitting higher (bull) or lower (bear) does not take over. Only when that extreme is broken does the anchor move on, which is what produces the staircase instead of a line per candle.</li>
+        <li><b>Invalidation is the CISD rule.</b> A wick beyond the protected level of that series removes the line. Same behaviour you already know from the CISD and the Continuation CISD.</li>
+        <li><b>The lines belong to their formation.</b> They follow the bias, the History count and "Draw only at Key Levels", and they disappear when the formation is invalidated or drops out of history.</li>
+        <li><b>No doubles.</b> Where a CISD, Continuation CISD or SMT CISD already anchors on the same series, that line stays and no Protected Swing is drawn on top of it.</li>
+      </ul>
+      <p class="para"><b>When it runs:</b> from the closure candle through the two HTF candles after it, so for a standard C2 closure roughly C2 to C4. It starts drawing on a candidate as soon as its CISD triggers, which means you see it live in a potential C2. If that C2 never confirms, the candidate and its lines go together. Up to 12 lines are kept per formation.</p>
+      <div class="note"><span class="k">Good to know</span>Give it its own color, clearly apart from your CISD line. On a busy move the two sit close together and the whole point is being able to tell at a glance which level is the trigger and which are the ones the move is defending.</div>
     </section>
 
     <!-- 3 -->
@@ -230,8 +250,9 @@
         <div><dt>HTF&sup2; Swings</dt><dd>Swing highs and lows one level higher: the HTF of your HTF. On a 5m chart your HTF is 1H, so HTF&sup2; is Daily. On a 1H chart HTF is Daily, so HTF&sup2; is Monthly. These are the levels the big moves react to, now visible without leaving your chart. Color, style, Max. Default off. With TF Alignment on Custom, HTF&sup2; follows your custom mapping.</dd></div>
         <div><dt>CTF Swings</dt><dd>The same, on your chart timeframe. All swing types show one bull and one bear line even at Max = 1.</dd></div>
         <div><dt>Separator</dt><dd>Vertical lines where each HTF period begins. Has a Count.</dd></div>
-        <div><dt>Session Lines &middot; 09:30 / 18:00</dt><dd>Opening price at two fixed New York times: 9:30 (NY stock open) and 18:00 (the day's open; forex charts use 17:00). Own color, style and toggle each. Intraday only.</dd></div>
-        <div><dt>Custom Session Line</dt><dd>Same mechanic, your chosen time. Enter any time as <span class="mono">HH:MM</span> in New York time and the indicator marks the opening price of that minute every day. Invalid input falls back to 10:30. Intraday only, on higher timeframes where no candle starts at that exact minute no line appears.</dd></div>
+        <div><dt>Session Lines &middot; Line 1 / 2 / 3</dt><dd>Three lines marking the opening price at a time of day. Each has its own color, style, toggle and time field &mdash; enter any time as <span class="mono">HH:MM</span> in <b>New York time</b> and the indicator marks the opening price of that minute. Defaults are <span class="mono">18:00</span> (the day's open), <span class="mono">09:30</span> (NY stock open) and <span class="mono">10:00</span>. Invalid input falls back to the default. Intraday only; on higher timeframes where no candle starts at that exact minute, no line appears.
+          <div class="note" style="margin:10px 0 0"><span class="k">One day at a time</span>A session line belongs to the current trading day. Before its time it is not on the chart yet, and it is cleared at the day rollover (18:00 New York, 17:00 on forex) &mdash; the same boundary PDH/PDL and the rest of the indicator use. A 10:00 line therefore appears at 10:00 and is gone by 18:00, never carried over from yesterday.</div>
+        </dd></div>
         <div><dt>Fib Projection</dt><dd>Fibonacci target levels projected ahead from a valid formation's CISD range, giving objective take-profit zones. Separate Label checkbox.</dd></div>
         <div><dt>T-Spot / EQ Fill</dt><dd>Highlights a reaction zone inside the formation. Bull and bear color, on/off. Only after a valid C2 closure (in C3 and C4) or a valid C3 closure (in C4).</dd></div>
       </dl>
@@ -247,6 +268,9 @@
         <div><dt>HTF&sup2; FVG</dt><dd>Gaps two levels up (the HTF of your HTF, see HTF&sup2; Swings). A Daily gap on your 5m chart is a bigger magnet than a 1H one, and this draws it right on your chart. Same controls as HTF FVG: colors, toggle, Max, invalidation mode <span class="opt">Close Through</span> <span class="opt">50% Close</span>. Default off.</dd></div>
         <div><dt>iFVG (Inverse FVG)</dt><dd>When a regular FVG is fully traded through it can invert (support and resistance flip). A Max TF dropdown limits where it appears.</dd></div>
         <div><dt>Bias Filter</dt><dd>Hides FVGs pointing against the current bias. Shows one bull and one bear even at Max = 1, but with the filter on you only see the one matching your direction.</dd></div>
+        <div><dt>Stop extending after touch &middot; Bars</dt><dd>By default an FVG box keeps growing to the right for as long as it lives. Turn this on and the box stops growing <b>Bars</b> candles after price first trades into it, so old gaps no longer stretch across the whole screen. The count runs in the <b>FVG's own timeframe</b>, and for HTF and HTF&sup2; gaps it counts whole candles from the one the touch happened in. On a 5m chart, a 1H gap tapped at 00:10 counts from the 00:00 hourly candle, so at Bars = 2 it freezes at 02:00. CTF gaps and iFVGs count in chart candles. Applies to all four types. Default off, 4 bars.
+          <div class="note" style="margin:10px 0 0"><span class="k">Good to know</span>This only stops the box from being drawn further right. It does not change when the gap dies &mdash; invalidation still runs on your chosen Inv. mode, and a frozen box disappears the moment price closes through it.</div>
+        </dd></div>
       </dl>
       <div class="note"><span class="k">Good to know</span><b>Max controls what is drawn, not what is remembered.</b> Internally the indicator keeps up to 3&times; your Max per direction, and the Key Level Filter checks against that full memory. See section 5.</div>
     </section>
@@ -299,6 +323,7 @@
         <div><dt>PDH/PDL SMT</dt><dd>Divergence at the previous day high and low.</dd></div>
         <div><dt>PWH/PWL SMT</dt><dd>Divergence at the previous week high and low.</dd></div>
         <div><dt>SMT on HTF Candle</dt><dd>Draws divergence on the HTF candle boxes.</dd></div>
+        <div><dt>Asset Label &middot; Size</dt><dd>Writes the diverging peer's name on the divergence line, so you see at a glance which instrument failed to follow. Works on CTF, HTF and PDH/PDL/PWH/PWL divergences. If both peers diverge you get both, separated by a slash. <b>Size</b> is its own setting, independent of the global Label Size. Default off.</dd></div>
         <div><dt>SMT Mode</dt><dd>The instruments you are compared against. <b>Automatic</b> recognizes your instrument and uses two correlated peers from the list below (e.g. NQ &rarr; ES + YM) &mdash; always both. <b>Custom</b> lets you set the peers yourself.</dd></div>
         <div><dt>Enable Second SMT?</dt><dd>Applies in <b>Custom</b> only. Off compares you against a single peer (Peer 1) &mdash; a touch lighter, since the second symbol is no longer fetched. <b>Automatic</b> always uses both list peers, so this has no effect there. On is the default.</dd></div>
         <div><dt>Peer 1 &middot; Peer 2 &middot; Inverse?</dt><dd>In Custom, type your two peer symbols. Each has an <b>Inverse?</b> checkbox for instruments that move opposite to yours (e.g. DXY), so the divergence still reads correctly.</dd></div>
