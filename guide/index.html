@@ -219,23 +219,11 @@
         <div><dt>CISD</dt><dd>Change in State of Delivery line. The confirmation trigger that makes a formation valid.</dd></div>
         <div><dt>Pending CISD</dt><dd>The next potential CISD level, and where it would form.</dd></div>
         <div><dt>Continuation CISD</dt><dd>After a valid closure, price should continue and form a continuation CISD. That is an entry opportunity.</dd></div>
-        <div><dt>Protected Swings</dt><dd>The levels a move defends on its way. The CISD marks where the move started; Protected Swings marks what it has been protecting since. Every opposing candle series that price closes through gets a line at its open, so you get a staircase of levels instead of a single anchor. Color, on/off, style, width. Default off. Full logic below.</dd></div>
+        <div><dt>Protected Swings</dt><dd>After a CISD, the <b>low</b> (in an uptrend) or <b>high</b> (in a downtrend) between the opposing candle series and the candle that closed through is a <b>Protected Low/High</b>. It should hold until your target is met. If price breaks it, that is weakness and the setup loses reliability, which is why the stop belongs just beyond it. The indicator marks one for every opposing series the move closes through, so you get a staircase of protected levels instead of a single anchor. Color, on/off, style, width. Default off.</dd></div>
         <div><dt>SMT CISD</dt><dd>A CISD that confirms an SMT divergence. Combines the trigger with divergence for a higher-confluence entry.</dd></div>
         <div><dt>CTF Closure Formation</dt><dd>Candle closure on the chart timeframe itself, for trading directly on a higher TF. Own color and toggle. Only on 15m charts and above.</dd></div>
         <div><dt>Draw only at Key Levels</dt><dd>Show a closure formation only when it forms at a key level. Everything else stays hidden. The whole formation hides as one unit. Hidden formations are not deleted, turn the toggle off and they return. SMT formations always show. Full logic in section 5.</dd></div>
       </dl>
-
-      <h3>Protected Swings in detail</h3>
-      <p class="intro">A move that runs keeps leaving structure behind. Every opposing candle series that price closes through is a level somebody is now defending. Protected Swings draws them one by one as the move develops, so you read where the move has been holding itself up rather than only where it began.</p>
-      <ul class="plain">
-        <li><b>A swing has to form.</b> A line only prints if at least one candle in that leg went beyond its left neighbour (lower low in a bull move, higher high in a bear move). Without it a plain staircase of rising lows would count as a swing, and it should not. A three-candle swing cannot be confirmed live, so this two-candle test is the working approximation.</li>
-        <li><b>The anchor locks.</b> It stays on the series whose extreme still holds. A later series sitting higher (bull) or lower (bear) does not take over. Only when that extreme is broken does the anchor move on, which is what produces the staircase instead of a line per candle.</li>
-        <li><b>Invalidation is the CISD rule.</b> A wick beyond the protected level of that series removes the line. Same behaviour you already know from the CISD and the Continuation CISD.</li>
-        <li><b>The lines belong to their formation.</b> They follow the bias, the History count and "Draw only at Key Levels", and they disappear when the formation is invalidated or drops out of history.</li>
-        <li><b>No doubles.</b> Where a CISD, Continuation CISD or SMT CISD already anchors on the same series, that line stays and no Protected Swing is drawn on top of it.</li>
-      </ul>
-      <p class="para"><b>When it runs:</b> from the closure candle through the two HTF candles after it, so for a standard C2 closure roughly C2 to C4. It starts drawing on a candidate as soon as its CISD triggers, which means you see it live in a potential C2. If that C2 never confirms, the candidate and its lines go together. Up to 12 lines are kept per formation.</p>
-      <div class="note"><span class="k">Good to know</span>Give it its own color, clearly apart from your CISD line. On a busy move the two sit close together and the whole point is being able to tell at a glance which level is the trigger and which are the ones the move is defending.</div>
     </section>
 
     <!-- 3 -->
