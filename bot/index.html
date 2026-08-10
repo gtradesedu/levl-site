@@ -107,6 +107,28 @@
   .shots.one{grid-template-columns:minmax(0,560px)}
   .shots.narrow{grid-template-columns:minmax(0,400px)}
 
+  /* click a screenshot to see it full size */
+  .shots img{cursor:zoom-in;transition:opacity .15s}
+  .shots img:hover{opacity:.86}
+  .shots img:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+  .lb{position:fixed;inset:0;z-index:100;display:none;place-items:center;cursor:zoom-out;
+    padding:clamp(14px,3vw,44px);background:rgba(14,17,22,.88)}
+  .lb.on{display:grid}
+  .lb figure{max-width:min(1500px,100%);display:flex;flex-direction:column;gap:14px;cursor:zoom-out}
+  .lb img{max-width:100%;max-height:calc(100vh - 160px);object-fit:contain;display:block;
+    border-radius:8px;background:var(--white);box-shadow:0 40px 90px -30px rgba(0,0,0,.85)}
+  .lb figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+    color:#8A93A0;text-align:center;line-height:1.45}
+  .lb figcaption b{color:#F1F3F4;font-weight:600}
+  .lb-x{position:absolute;top:14px;right:16px;width:40px;height:40px;border-radius:50%;cursor:pointer;
+    border:1px solid rgba(255,255,255,.3);background:transparent;color:#F1F3F4;
+    font-family:var(--mono);font-size:17px;line-height:1;display:grid;place-items:center}
+  .lb-x:hover{background:rgba(255,255,255,.13)}
+  .lb-hint{position:absolute;left:0;right:0;bottom:16px;text-align:center;pointer-events:none;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#5F6976}
+  @media(max-width:900px){.lb-hint{display:none}}
+  @media print{.lb{display:none!important}}
+
   .cta{display:inline-block;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:13px;
     letter-spacing:.06em;padding:12px 20px;border-radius:8px;margin-top:6px}
   .cta:hover{text-decoration:none;background:#1A2029}
@@ -408,3 +430,62 @@
   <p><b>Levl Trading Bot</b> &middot; setup guide, August 2026. Questions go to the Discord, that is the fastest way to reach me.</p>
   <p style="margin-top:12px">Trading futures carries substantial risk of loss. Past performance does not indicate future results. Nothing here is financial advice — you are responsible for what runs on your account, and for knowing your prop firm's rules on automation.</p>
 </footer>
+
+<script>
+/* Screenshots open full size on click. Images are already inlined as data URIs
+   by build-bot-guide.py, so the overlay reuses the same source and loads nothing. */
+(function(){
+  var shots = document.querySelectorAll('.shots img');
+  if (!shots.length) return;
+
+  var lb = document.createElement('div');
+  lb.className = 'lb';
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.innerHTML =
+    '<button class="lb-x" type="button" aria-label="Close">&#10005;</button>' +
+    '<figure><img alt=""><figcaption></figcaption></figure>' +
+    '<div class="lb-hint">Click anywhere or press Esc to close</div>';
+  document.body.appendChild(lb);
+
+  var lbImg = lb.querySelector('img'),
+      lbCap = lb.querySelector('figcaption'),
+      lbX   = lb.querySelector('.lb-x'),
+      from  = null;
+
+  function open(img){
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || '';
+    var cap = img.parentNode.querySelector('figcaption');
+    lbCap.innerHTML = cap ? cap.innerHTML : '';
+    lbCap.style.display = cap ? '' : 'none';
+    lb.classList.add('on');
+    document.documentElement.style.overflow = 'hidden';
+    from = img;
+    lbX.focus();
+  }
+
+  function close(){
+    if (!lb.classList.contains('on')) return;
+    lb.classList.remove('on');
+    document.documentElement.style.overflow = '';
+    lbImg.removeAttribute('src');
+    if (from) from.focus();
+  }
+
+  Array.prototype.forEach.call(shots, function(img){
+    img.tabIndex = 0;
+    img.setAttribute('role', 'button');
+    if (!img.title) img.title = 'Click to enlarge';
+    img.addEventListener('click', function(){ open(img); });
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar'){ e.preventDefault(); open(img); }
+    });
+  });
+
+  lb.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' || e.key === 'Esc') close();
+  });
+})();
+</script>
