@@ -76,11 +76,24 @@
 
   .panes{display:grid;grid-template-columns:1.9fr 1fr;gap:10px;margin-top:10px}
   @media(max-width:900px){.panes{grid-template-columns:1fr}}
-  .pane{border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(255,255,255,.03);padding:13px 14px;min-width:0}
+  .pane{border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(255,255,255,.03);padding:13px 14px;min-width:0;
+      display:flex;flex-direction:column}
   .pane>u{display:block;text-decoration:none;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;color:#5F6976}
-  .curve{margin-top:10px;height:186px}
+  /* grows with the pane: the month list next to it sets the height, and a fixed
+     curve would leave the rest of the box empty */
+  .curve{margin-top:10px;flex:1;min-height:186px;max-height:340px;position:relative}
   .curve svg{width:100%;height:100%;display:block;overflow:visible}
-  .months{margin-top:12px;display:flex;flex-direction:column;gap:9px}
+  /* the svg is stretched to the box, so the last point cannot be a circle
+     inside it without turning into an ellipse */
+  .curve .dot{position:absolute;width:9px;height:9px;border-radius:50%;
+      transform:translate(-50%,-50%);pointer-events:none}
+  /* stacked, nothing sets the row height, so the curve would fall back to the
+     svg's own square ratio and stand far too tall on a phone */
+  @media(max-width:900px){.curve{flex:none;height:200px;max-height:none}}
+  /* wraps into columns as the record grows, so a long month list does not
+     stretch the row and leave the curve beside it out of shape */
+  .months{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));
+      gap:9px 16px;align-content:start}
   .mrow{display:grid;grid-template-columns:38px 1fr 58px;align-items:center;gap:9px;
     font-family:var(--mono);font-size:11px;color:#8A93A0;font-variant-numeric:tabular-nums}
   .mrow .track{height:7px;border-radius:4px;background:rgba(255,255,255,.07);position:relative;overflow:hidden}
@@ -535,8 +548,9 @@
         '<path d="' + area + '" fill="url(#eqf)"/>' +
         '<path d="' + line + '" fill="none" stroke="' + col + '" stroke-width="1.6" ' +
           'stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>' +
-        '<circle cx="' + x(s.eq.length-1).toFixed(2) + '" cy="' + y(s.net).toFixed(2) + '" r="2.2" fill="' + col + '" vector-effect="non-scaling-stroke"/>' +
-      '</svg>';
+      '</svg>' +
+      '<span class="dot" style="left:' + x(s.eq.length-1).toFixed(2) + '%;top:' + y(s.net).toFixed(2) +
+        '%;background:' + col + '"></span>';
   }
 
   function renderMonths(trades, d){
