@@ -180,10 +180,16 @@
   <p class="intro">The bot runs on TradingView and sends its orders to your broker through TradersPost. Three accounts, and one compatibility question that decides whether this works at all.</p>
 
   <ul class="plain">
-    <li><b>TradingView</b> — any paid plan. Webhook alerts are not available on the free plan. Sign up through <a href="https://www.tradingview.com/jules?aff_id=169281" rel="sponsored noopener" target="_blank">my link</a> and you get a <b>$15 credit</b>.</li>
+    <li><b>TradingView</b> — any paid plan. Webhook alerts are not available on the free plan, and your account needs <b>2-factor authentication switched on</b>, otherwise TradingView refuses to send them. Sign up through <a href="https://www.tradingview.com/jules?aff_id=169281" rel="sponsored noopener" target="_blank">my link</a> and you get a <b>$15 credit</b>.</li>
     <li><b>TradersPost</b> — the bridge between the alert and your broker. Free 7 day trial, then paid. My link and a discount code are in step 2.</li>
     <li><b>A futures account</b> — your own, a prop firm evaluation, or a funded account.</li>
   </ul>
+
+  <div class="note warn">
+    <span class="k">On Essential and Plus, the alert expires every two months</span>
+    Only <b>Premium</b> and above can set an alert to run open-ended. On <b>Essential</b> and <b>Plus</b> the longest expiration TradingView offers is <b>two months</b>. When it runs out the alert stops, and the bot stops with it, without telling you.<br><br>
+    Nothing breaks and nothing is lost. You create the alert again, which is step 7 and takes two minutes. Put a repeating reminder in your calendar the day you set it up, so the bot is never off without you knowing.
+  </div>
 
   <div class="note stop">
     <span class="k">Check this before you pay for anything</span>
@@ -385,7 +391,7 @@
   <dl class="set">
     <div><dt>Condition</dt><dd>The bot. In the second row pick <b>alert() function calls only</b>.</dd></div>
     <div><dt>Interval</dt><dd><b>Same as chart</b>, which is 15 minutes.</dd></div>
-    <div><dt>Expiration</dt><dd><b>Open-ended</b>, so it never quietly stops.</dd></div>
+    <div><dt>Expiration</dt><dd><b>Open-ended</b>, so it never quietly stops. On <b>Essential</b> and <b>Plus</b> that option does not exist and two months is the maximum. Pick the longest date you are offered and set a reminder to create the alert again before it runs out.</dd></div>
     <div><dt>Message</dt><dd>Nothing to fill in. With this alert type TradingView has no message field, because the order details come from the script. Clicking the row only lets you rename the alert.</dd></div>
     <div><dt>Notifications</dt><dd>Tick <b>Webhook URL</b> and paste the address from step 4. Untick the rest unless you want your computer chiming on every trade.</dd></div>
   </dl>
@@ -423,7 +429,8 @@
 
   <h3>If something else is off</h3>
   <ul class="plain dash">
-    <li><b>No signal at all</b> — alert type is wrong, or the webhook URL is incomplete. It has two segments after <span class="mono">/webhook/</span>.</li>
+    <li><b>No signal at all</b> — alert type is wrong, the webhook URL is incomplete (it has two segments after <span class="mono">/webhook/</span>), or 2-factor authentication is off in your TradingView account.</li>
+    <li><b>It traded for weeks, then stopped</b> — the alert expired. On Essential and Plus that happens after two months. Create it again, step 7.</li>
     <li><b>Signal arrives, no order</b> — the subscription is disabled, or still on Manual Submit. Step 6.</li>
     <li><b>Only one direction trades</b> — Allowed sides is still on Long Only. Step 5.</li>
     <li><b>A position stayed open</b> — Exit order type is still on Limit. Step 5.</li>
