@@ -177,7 +177,7 @@
 <section id="s1">
   <div class="sn"><span class="num">01</span><span class="bar"></span><span>Before you start</span></div>
   <h2>What you need, and one thing to check first</h2>
-  <p class="intro">The bot runs on TradingView and sends its orders to your broker through TradersPost. Three accounts, and one compatibility question that decides whether this works at all.</p>
+  <p class="intro">The bot runs on TradingView and sends its orders to your broker through TradersPost. Three accounts, and two things to check before you pay for anything.</p>
 
   <ul class="plain">
     <li><b>TradingView</b> — any paid plan. Webhook alerts are not available on the free plan, and your account needs <b>2-factor authentication switched on</b>, otherwise TradingView refuses to send them. Sign up through <a href="https://www.tradingview.com/jules?aff_id=169281" rel="sponsored noopener" target="_blank">my link</a> and you get a <b>$15 credit</b>.</li>
@@ -195,6 +195,11 @@
     <span class="k">Check this before you pay for anything</span>
     TradersPost reaches prop firm accounts two ways: <b>Tradovate</b> or <b>ProjectX</b>. <b>ProjectX connections cannot attach bracket orders.</b> On a ProjectX account your stop loss and take profit never reach your broker, and the position runs unprotected.<br><br>
     Ask your firm which one they use, or look for it on the TradersPost connections page. If it is ProjectX, do not run the bot on that account.
+  </div>
+
+  <div class="note stop">
+    <span class="k">Delayed data makes the bot fire ten minutes late</span>
+    TradingView shows MNQ on delayed data unless real-time CME data is active on your account. That's why it is important that you either buy the <b>CME real-time data</b> subscription for MNQ inside TradingView, or get it at no extra cost through your broker: prop firm accounts on <b>Tradovate</b> include real-time CME data. For the free route you must <b>connect your Tradovate account to TradingView</b>. Without that connection your data stays delayed even though your firm already pays for it.
   </div>
 
   <h3>The chart is not a choice</h3>
@@ -429,6 +434,7 @@
 
   <h3>If something else is off</h3>
   <ul class="plain dash">
+    <li><b>Signals arrive about ten minutes late</b> — your TradingView data is delayed. Real-time CME data is not active, or your Tradovate account is not connected to TradingView. Section 1.</li>
     <li><b>No signal at all</b> — alert type is wrong, the webhook URL is incomplete (it has two segments after <span class="mono">/webhook/</span>), or 2-factor authentication is off in your TradingView account.</li>
     <li><b>It traded for weeks, then stopped</b> — the alert expired. On Essential and Plus that happens after two months. Create it again, step 7.</li>
     <li><b>Signal arrives, no order</b> — the subscription is disabled, or still on Manual Submit. Step 6.</li>
