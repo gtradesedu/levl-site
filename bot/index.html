@@ -63,7 +63,7 @@
   .warn b{color:#FFD79A}
 
   .dash-body{padding:clamp(16px,2.2vw,26px)}
-  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
   .kpi{border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:12px 13px;background:rgba(255,255,255,.03);min-width:0}
   .kpi u{display:block;text-decoration:none;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;color:#5F6976;white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis}
@@ -447,7 +447,6 @@
     return {
       n: n, net: net, eq: eq, maxDD: dd, streak: best,
       winRate: decided ? wins / decided : 0,
-      avg: n ? net / n : 0,
       pf: loss > 0 ? gross / loss : (gross > 0 ? Infinity : 0),
       wins: wins, losses: losses, flat: n - decided
     };
@@ -487,7 +486,6 @@
     var tiles = [
       ['NET RESULT',  fmt(s.net, d),                 cls(s.net),  s.n + ' trades'],
       ['WIN RATE',    Math.round(s.winRate*100) + '%', '',        s.wins + 'W / ' + s.losses + 'L' + (s.flat ? ' / ' + s.flat + ' BE' : '')],
-      ['AVERAGE',     fmt(s.avg, d, {dec:2}),        cls(s.avg),  'per trade'],
       ['MAX DRAWDOWN',fmt(-s.maxDD, d, {sign:false}),s.maxDD ? 'r' : '', 'peak to trough'],
       ['PROFIT FACTOR', pf,                          '',          'gross win / gross loss'],
       ['BEST WIN STREAK', s.streak + '',             '',          'trades in a row']
